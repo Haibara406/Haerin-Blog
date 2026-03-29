@@ -3,6 +3,7 @@ import path from 'path'
 import matter from 'gray-matter'
 import { remark } from 'remark'
 import remarkHtml from 'remark-html'
+import remarkGfm from 'remark-gfm'
 import { unified } from 'unified'
 import remarkParse from 'remark-parse'
 import remarkRehype from 'remark-rehype'
@@ -10,6 +11,7 @@ import rehypeHighlight from 'rehype-highlight'
 import rehypeSlug from 'rehype-slug'
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'
 import rehypeStringify from 'rehype-stringify'
+import rehypeRaw from 'rehype-raw'
 
 const postsDirectory = path.join(process.cwd(), 'content/posts')
 
@@ -64,7 +66,9 @@ export function getPostBySlug(slug: string): Post | null {
 
     const processedContent = unified()
       .use(remarkParse)
-      .use(remarkRehype)
+      .use(remarkGfm) // 支持 GFM（表格、删除线、任务列表等）
+      .use(remarkRehype, { allowDangerousHtml: true }) // 允许 HTML
+      .use(rehypeRaw) // 处理原始 HTML
       .use(rehypeSlug)
       .use(rehypeAutolinkHeadings, { behavior: 'wrap' })
       .use(rehypeHighlight)

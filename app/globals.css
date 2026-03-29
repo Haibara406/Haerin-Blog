@@ -194,6 +194,95 @@ body {
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
 }
 
+/* 表格样式 */
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 2rem 0;
+  font-size: 0.9em;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.prose table thead {
+  background: var(--bg-secondary);
+}
+
+.prose table th {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  font-weight: 600;
+  color: var(--text-primary);
+  border-bottom: 2px solid var(--border-color);
+}
+
+.prose table td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--border-color);
+  color: var(--text-primary);
+}
+
+.prose table tbody tr:hover {
+  background: var(--bg-secondary);
+}
+
+.prose table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* 列表样式 */
+.prose ul,
+.prose ol {
+  margin: 1.5rem 0;
+  padding-left: 1.5rem;
+}
+
+.prose ul {
+  list-style-type: disc;
+}
+
+.prose ol {
+  list-style-type: decimal;
+}
+
+.prose li {
+  margin: 0.5rem 0;
+  line-height: 1.8;
+  color: var(--text-primary);
+}
+
+.prose li > p {
+  margin: 0.5rem 0;
+}
+
+/* 任务列表 */
+.prose input[type="checkbox"] {
+  margin-right: 0.5rem;
+}
+
+/* 引用块 */
+.prose blockquote {
+  border-left: 4px solid var(--accent);
+  padding-left: 1rem;
+  margin: 1.5rem 0;
+  font-style: italic;
+  color: var(--text-secondary);
+}
+
+/* 水平线 */
+.prose hr {
+  border: none;
+  border-top: 1px solid var(--border-color);
+  margin: 2rem 0;
+}
+
+/* 删除线 */
+.prose del {
+  text-decoration: line-through;
+  opacity: 0.7;
+}
+
 /* Giscus 评论样式深度优化 */
 .giscus, .giscus-frame {
   width: 100%;
