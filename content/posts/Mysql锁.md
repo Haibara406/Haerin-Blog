@@ -2,8 +2,8 @@
 title: "Mysql锁"
 date: "2026-02-27"
 excerpt: "Mysql InnoDB的锁可以从两个维度来分，分别是粒度和模式"
-tags: ["Database", "MySQL", "Thread", "Process", "AI"]
-category: "Backend"
+tags: ["MySQL"]
+category: "Database"
 ---
 
 Mysql InnoDB的锁可以从两个维度来分，分别是粒度和模式

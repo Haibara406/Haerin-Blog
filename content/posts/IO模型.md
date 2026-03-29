@@ -2,8 +2,8 @@
 title: "IO模型"
 date: "2026-02-04"
 excerpt: "socket和fd"
-tags: ["Redis", "Network", "Thread", "Process", "System"]
-category: "Backend"
+tags: ["IO", "Network"]
+category: "Computer Network""
 ---
 
 ### socket和fd

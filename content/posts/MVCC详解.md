@@ -2,8 +2,8 @@
 title: "MVCC详解"
 date: "2026-02-16"
 excerpt: "📋 目录"
-tags: ["Database", "MySQL", "Network", "Algorithm", "Thread"]
-category: "Backend"
+tags: ["MySQL", "InnoDB"]
+category: "Database"
 ---
 
 

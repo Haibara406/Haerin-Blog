@@ -2,7 +2,7 @@
 title: "MinioUtils"
 date: "2025-10-27"
 excerpt: "MinioUtils - 通用 MinIO 文件上传工具类"
-tags: ["Java", "Spring", "Network", "Thread", "AI"]
+tags: ["Java", "Minio"]
 category: "Backend"
 ---
 

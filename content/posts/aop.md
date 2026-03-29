@@ -2,7 +2,7 @@
 title: "aop"
 date: "2026-03-24"
 excerpt: "AOP"
-tags: ["Java", "Spring", "Redis", "AI"]
+tags: ["Java", "Spring", "SpringBoot"]
 category: "Backend"
 ---
 

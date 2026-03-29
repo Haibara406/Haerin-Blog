@@ -2,8 +2,8 @@
 title: "ThreadLocal"
 date: "2026-03-09"
 excerpt: "ThreadLocal"
-tags: ["Network", "Thread", "Process", "AI"]
-category: "Network"
+tags: ["Thread", "Java"]
+category: "Backend"
 ---
 
 ## ThreadLocal

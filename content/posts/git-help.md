@@ -2,8 +2,8 @@
 title: "git-help"
 date: "2025-12-24"
 excerpt: "🧭 Git 中文速查表"
-tags: ["Thread", "AI"]
-category: "AI"
+tags: ["git"]
+category: "Backend"
 ---
 
 # 🧭 Git 中文速查表

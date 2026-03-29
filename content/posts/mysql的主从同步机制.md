@@ -2,8 +2,8 @@
 title: "mysql的主从同步机制"
 date: "2026-03-06"
 excerpt: "Mysql的主从同步机制"
-tags: ["Database", "MySQL", "Thread", "Process"]
-category: "Backend"
+tags: ["InnoDB", "MySQL"]
+category: "Database"
 ---
 
 ## Mysql的主从同步机制

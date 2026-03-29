@@ -2,8 +2,8 @@
 title: "redis的持久化机制"
 date: "2026-02-11"
 excerpt: "Redis的持久化机制"
-tags: ["Database", "Redis", "Network", "Thread", "Process"]
-category: "Backend"
+tags: ["Redis"]
+category: "Database"
 ---
 
 ## Redis的持久化机制

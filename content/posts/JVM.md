@@ -2,7 +2,7 @@
 title: "JVM"
 date: "2026-02-08"
 excerpt: "JVM"
-tags: ["Java", "Spring", "Database", "Redis", "MySQL"]
+tags: ["Java", "JVM"]
 category: "Backend"
 ---
 

@@ -2,8 +2,8 @@
 title: "mysql事务的二阶段提交"
 date: "2026-01-14"
 excerpt: "Mysql的事务二阶段提交是什么"
-tags: ["Database", "MySQL", "Thread"]
-category: "Backend"
+tags: ["InnoDB", "MySQL"]
+category: "Database"
 ---
 
 ### Mysql的事务二阶段提交是什么

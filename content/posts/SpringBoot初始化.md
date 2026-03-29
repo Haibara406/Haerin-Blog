@@ -2,7 +2,7 @@
 title: "SpringBoot初始化"
 date: "2026-03-18"
 excerpt: "SpringBoot中常见的几种初始化方式"
-tags: ["Java", "Spring", "Redis", "Thread", "Process"]
+tags: ["Java", "Spring", "SpringBoot"]
 category: "Backend"
 ---
 

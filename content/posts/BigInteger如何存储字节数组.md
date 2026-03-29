@@ -2,7 +2,7 @@
 title: "BigInteger如何存储字节数组"
 date: "2025-12-17"
 excerpt: "📋 目录"
-tags: ["Java", "Algorithm", "AI"]
+tags: ["Java"]
 category: "Backend"
 ---
 

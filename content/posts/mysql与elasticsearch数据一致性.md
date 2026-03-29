@@ -2,7 +2,7 @@
 title: "mysql与elasticsearch数据一致性"
 date: "2025-10-27"
 excerpt: "目录"
-tags: ["Java", "Database", "Redis", "MySQL", "Network"]
+tags: ["Java", "MySQL", "ElasticSearch"]
 category: "Backend"
 ---
 

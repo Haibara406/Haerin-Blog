@@ -1,9 +1,9 @@
 ---
 title: "select-poll-epoll"
 date: "2026-02-11"
-excerpt: "简介"
-tags: ["Network", "Thread", "Process", "System", "AI"]
-category: "Backend"
+excerpt: "select-poll-epoll"
+tags: ["Operating System"]
+category: "Operating System"
 ---
 
 ### 简介

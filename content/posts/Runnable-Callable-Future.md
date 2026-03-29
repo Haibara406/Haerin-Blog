@@ -1,8 +1,8 @@
 ---
 title: "Runnable-Callable-Future"
 date: "2026-03-02"
-excerpt: "| 名称         | 定义                                               | 返回值     | 是否可抛异常                                                 |"
-tags: ["Java", "Thread", "Process"]
+excerpt: "Runnable-Callable-Future"
+tags: ["Java", "Thread"]
 category: "Backend"
 ---
 

@@ -2,7 +2,7 @@
 title: "mybatis"
 date: "2026-02-04"
 excerpt: "Mybatis简介"
-tags: ["Java", "Spring", "Database", "Redis", "MySQL"]
+tags: ["Java", "ORM"]
 category: "Backend"
 ---
 

@@ -2,7 +2,7 @@
 title: "Git使用说明"
 date: "2025-10-27"
 excerpt: "Git 使用说明"
-tags: ["Network", "Algorithm", "Thread", "System", "AI"]
+tags: ["Git"]
 category: "Backend"
 ---
 

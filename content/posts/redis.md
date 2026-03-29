@@ -2,8 +2,8 @@
 title: "redis"
 date: "2026-02-25"
 excerpt: "Redis"
-tags: ["Database", "Redis", "Network", "Algorithm", "Thread"]
-category: "Backend"
+tags: [Redis"]
+category: "Database"
 ---
 
 ## Redis

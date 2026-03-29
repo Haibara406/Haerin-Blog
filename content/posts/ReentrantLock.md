@@ -2,7 +2,7 @@
 title: "ReentrantLock"
 date: "2026-02-10"
 excerpt: "CAS"
-tags: ["Java", "Redis", "Network", "Thread", "Process"]
+tags: ["Java", "JUC"]
 category: "Backend"
 ---
 

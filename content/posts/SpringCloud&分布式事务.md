@@ -2,7 +2,7 @@
 title: "SpringCloud&分布式事务"
 date: "2026-03-05"
 excerpt: "分布式和微服务的区别"
-tags: ["Java", "Spring", "Database", "Redis", "MySQL"]
+tags: ["Java", "SpringCloud"]
 category: "Backend"
 ---
 

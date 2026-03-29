@@ -2,8 +2,8 @@
 title: "http和https的区别"
 date: "2026-02-22"
 excerpt: "http到https的演变"
-tags: ["Redis", "Network", "Algorithm", "Thread", "System"]
-category: "Backend"
+tags: ["Network", "HTTP&HTTPS"]
+category: "Computer Network"
 ---
 
 ### http到https的演变

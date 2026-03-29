@@ -2,8 +2,8 @@
 title: "redis pipeline"
 date: "2026-01-14"
 excerpt: "Pipeline"
-tags: ["Database", "Redis", "Network", "System"]
-category: "Backend"
+tags: ["Redis"]
+category: "Database"
 ---
 
 ## Pipeline

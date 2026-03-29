@@ -2,8 +2,8 @@
 title: "websocket"
 date: "2026-03-01"
 excerpt: "Websocket"
-tags: ["Java", "Spring", "Redis", "Network"]
-category: "Backend"
+tags: ["Websocket", "Network"]
+category: "Computer Network"
 ---
 
 ### Websocket

@@ -2,7 +2,7 @@
 title: "List迭代器"
 date: "2026-03-05"
 excerpt: "**Iterator** 是 Java 集合框架提供的统一遍历接口，不管底层是 ArrayList、LinkedList 还是 HashSet，都能用同一套 API 依次访问每个元素，完全不用关心集合内部是数组还是链表。"
-tags: ["Java", "Thread", "Process", "AI"]
+tags: ["Java"]
 category: "Backend"
 ---
 

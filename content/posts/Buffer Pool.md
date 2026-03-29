@@ -2,8 +2,8 @@
 title: "Buffer Pool"
 date: "2025-10-27"
 excerpt: "> 📖 深入理解 MySQL InnoDB 存储引擎的核心组件 - Buffer Pool 的实现原理与优化机制"
-tags: ["Java", "Database", "Redis", "MySQL", "Network"]
-category: "Backend"
+tags: ["MySQL", "InnoDB"]
+category: "Database"
 ---
 
 > 📖 深入理解 MySQL InnoDB 存储引擎的核心组件 - Buffer Pool 的实现原理与优化机制

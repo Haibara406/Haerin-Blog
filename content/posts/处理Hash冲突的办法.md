@@ -2,7 +2,7 @@
 title: "处理Hash冲突的办法"
 date: "2025-12-27"
 excerpt: "Hash冲突是什么"
-tags: ["Java", "Redis"]
+tags: ["Java", "Hash"]
 category: "Backend"
 ---
 

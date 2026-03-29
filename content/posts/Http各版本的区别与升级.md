@@ -2,8 +2,8 @@
 title: "Http各版本的区别与升级"
 date: "2026-03-02"
 excerpt: "HTTP 1.0"
-tags: ["Redis", "Network", "AI"]
-category: "Backend"
+tags: ["Network", "HTTP&HTTPS"]
+category: "Computer Network"
 ---
 
 ### HTTP 1.0

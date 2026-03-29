@@ -2,8 +2,8 @@
 title: "TCP"
 date: "2026-03-09"
 excerpt: "TCP"
-tags: ["Database", "Redis", "Network", "Algorithm", "Thread"]
-category: "Backend"
+tags: ["Network", "TCP"]
+category: "Computer Network"
 ---
 
 # TCP

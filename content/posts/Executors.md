@@ -2,7 +2,7 @@
 title: "Executors"
 date: "2025-10-27"
 excerpt: "Executors"
-tags: ["Java", "Redis", "Thread", "Process"]
+tags: ["Java", "Executor"]
 category: "Backend"
 ---
 

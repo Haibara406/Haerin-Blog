@@ -2,7 +2,7 @@
 title: "synchronized"
 date: "2026-01-25"
 excerpt: "synchronized"
-tags: ["Java", "Redis", "Network", "Thread", "Process"]
+tags: ["Java", "JUC"]
 category: "Backend"
 ---
 

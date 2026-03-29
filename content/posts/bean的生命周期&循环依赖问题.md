@@ -2,7 +2,7 @@
 title: "bean的生命周期&循环依赖问题"
 date: "2026-02-04"
 excerpt: "bean的生命周期"
-tags: ["Java", "Spring", "Database", "Redis", "MySQL"]
+tags: ["Java", "Spring", "SpringBoot"]
 category: "Backend"
 ---
 

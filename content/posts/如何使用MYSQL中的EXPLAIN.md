@@ -2,8 +2,8 @@
 title: "如何使用MYSQL中的EXPLAIN"
 date: "2026-02-22"
 excerpt: "如何使用EXPLAIN进行查询分析"
-tags: ["Database", "MySQL", "Network", "Algorithm", "AI"]
-category: "Backend"
+tags: ["MySQL"]
+category: "Database"
 ---
 
 ### 如何使用EXPLAIN进行查询分析

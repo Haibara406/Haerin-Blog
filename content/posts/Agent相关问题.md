@@ -2,7 +2,7 @@
 title: "Agent相关问题"
 date: "2026-03-24"
 excerpt: "什么是大模型Agent？他和传统的大模型有什么不同？"
-tags: ["Database", "Network", "Algorithm", "Thread", "AI"]
+tags: ["Agent", "AI"]
 category: "Backend"
 ---
 
