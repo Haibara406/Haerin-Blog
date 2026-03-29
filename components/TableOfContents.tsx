@@ -149,13 +149,15 @@ export default function TableOfContents({ content }: { content: string }) {
   if (toc.length === 0) return null
 
   return (
-    <nav className="hidden xl:block sticky top-32 w-64 max-h-[calc(100vh-200px)] overflow-y-auto">
-      <div className="text-sm font-semibold mb-4 text-gray-900 dark:text-gray-100 px-2">
-        目录
+    <aside className="hidden xl:block w-64 flex-shrink-0">
+      <div className="sticky top-32 max-h-[calc(100vh-200px)] overflow-y-auto">
+        <div className="text-sm font-semibold mb-4 text-gray-900 dark:text-gray-100 px-2">
+          目录
+        </div>
+        <ul className="space-y-1">
+          {toc.map((item) => renderTOCItem(item))}
+        </ul>
       </div>
-      <ul className="space-y-1">
-        {toc.map((item) => renderTOCItem(item))}
-      </ul>
-    </nav>
+    </aside>
   )
 }

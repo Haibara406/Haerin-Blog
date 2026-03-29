@@ -69,8 +69,8 @@ export function getPostBySlug(slug: string): Post | null {
       .use(remarkGfm) // 支持 GFM（表格、删除线、任务列表等）
       .use(remarkRehype, { allowDangerousHtml: true }) // 允许 HTML
       .use(rehypeRaw) // 处理原始 HTML
-      .use(rehypeSlug)
-      .use(rehypeAutolinkHeadings, { behavior: 'wrap' })
+      .use(rehypeSlug) // 为标题添加 ID
+      // 移除 rehypeAutolinkHeadings，不自动添加链接
       .use(rehypeHighlight)
       .use(rehypeStringify)
       .processSync(content)
