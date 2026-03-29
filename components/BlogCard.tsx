@@ -40,7 +40,7 @@ export default function BlogCard({ post, index }: { post: Post; index: number })
       className={`fade-in-section ${isVisible ? 'is-visible' : ''}`}
       style={{ transitionDelay: `${index * 100}ms` }}
     >
-      <Link href={`/post/${post.slug}`}>
+      <Link href={`/post/${encodeURIComponent(post.slug)}`}>
         <article
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}

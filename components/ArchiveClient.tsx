@@ -1,5 +1,6 @@
 'use client'
 
+import { useState } from 'react'
 import Link from 'next/link'
 import { useLanguage } from '@/components/LanguageProvider'
 
@@ -15,6 +16,9 @@ interface Post {
 export default function ArchiveClient({ archive }: { archive: Record<string, Omit<Post, 'content'>[]> }) {
   const { t } = useLanguage()
   const years = Object.keys(archive).sort((a, b) => parseInt(b) - parseInt(a))
+  const [selectedYear, setSelectedYear] = useState<string | null>(null)
+
+  const displayYears = selectedYear ? [selectedYear] : years
 
   return (
     <div className="max-w-4xl mx-auto px-6 py-20">
@@ -27,8 +31,35 @@ export default function ArchiveClient({ archive }: { archive: Record<string, Omi
         </p>
       </header>
 
+      {/* Year Filter */}
+      <div className="mb-12 flex flex-wrap gap-3">
+        <button
+          onClick={() => setSelectedYear(null)}
+          className={`px-4 py-2 rounded-lg transition-colors ${
+            selectedYear === null
+              ? 'bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900'
+              : 'border border-gray-200 dark:border-gray-800 hover:border-gray-300 dark:hover:border-gray-700'
+          }`}
+        >
+          {t('archive.all')} ({Object.values(archive).flat().length})
+        </button>
+        {years.map((year) => (
+          <button
+            key={year}
+            onClick={() => setSelectedYear(year)}
+            className={`px-4 py-2 rounded-lg transition-colors ${
+              selectedYear === year
+                ? 'bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900'
+                : 'border border-gray-200 dark:border-gray-800 hover:border-gray-300 dark:hover:border-gray-700'
+            }`}
+          >
+            {year} ({archive[year].length})
+          </button>
+        ))}
+      </div>
+
       <div className="space-y-12">
-        {years.map((year, yearIndex) => (
+        {displayYears.map((year, yearIndex) => (
           <section
             key={year}
             className="animate-slide-up"
@@ -41,7 +72,7 @@ export default function ArchiveClient({ archive }: { archive: Record<string, Omi
               {archive[year].map((post) => (
                 <Link
                   key={post.slug}
-                  href={`/post/${post.slug}`}
+                  href={`/post/${encodeURIComponent(post.slug)}`}
                   className="block group"
                 >
                   <article className="flex gap-6 items-start hover:translate-x-2 transition-transform duration-300">

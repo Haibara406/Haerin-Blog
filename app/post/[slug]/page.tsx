@@ -14,7 +14,9 @@ export async function generateStaticParams() {
 }
 
 export default function Post({ params }: { params: { slug: string } }) {
-  const post = getPostBySlug(params.slug)
+  // 解码 URL 编码的 slug（处理中文文件名）
+  const decodedSlug = decodeURIComponent(params.slug)
+  const post = getPostBySlug(decodedSlug)
 
   if (!post) {
     notFound()
