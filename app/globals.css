@@ -113,6 +113,51 @@ body {
   }
 }
 
+.prose h4 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1.4;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+  color: var(--text-primary);
+}
+
+@media (min-width: 640px) {
+  .prose h4 {
+    font-size: 1.25rem;
+  }
+}
+
+.prose h5 {
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.5;
+  margin-top: 1.25rem;
+  margin-bottom: 0.5rem;
+  color: var(--text-primary);
+}
+
+@media (min-width: 640px) {
+  .prose h5 {
+    font-size: 1.125rem;
+  }
+}
+
+.prose h6 {
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.5;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  color: var(--text-secondary);
+}
+
+@media (min-width: 640px) {
+  .prose h6 {
+    font-size: 1rem;
+  }
+}
+
 .prose p {
   font-size: inherit;
   line-height: 1.8;
