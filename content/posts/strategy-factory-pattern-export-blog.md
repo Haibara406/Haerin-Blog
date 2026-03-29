@@ -1,9 +1,11 @@
 ---
-title: "strategy-factory-pattern-export-blog"
-date: "2025-10-27"
-excerpt: "从零开始：用策略模式+工厂模式重构导出功能的思考与实践"
-tags: ["Java","Design Patterns"]
-category: "Backend"
+title: strategy-factory-pattern-export-blog
+date: '2025-10-27'
+excerpt: 从零开始：用策略模式+工厂模式重构导出功能的思考与实践
+tags:
+  - Java
+  - Design Patterns
+category: Backend
 ---
 
 # 从零开始：用策略模式+工厂模式重构导出功能的思考与实践

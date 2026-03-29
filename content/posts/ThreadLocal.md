@@ -1,9 +1,11 @@
 ---
-title: "ThreadLocal"
-date: "2026-03-09"
-excerpt: "ThreadLocal"
-tags: ["Thread", "Java"]
-category: "Backend"
+title: ThreadLocal
+date: '2026-03-09'
+excerpt: ThreadLocal
+tags:
+  - Thread
+  - Java
+category: Backend
 ---
 
 ## ThreadLocal

@@ -1,9 +1,11 @@
 ---
-title: "synchronized"
-date: "2026-01-25"
-excerpt: "synchronized"
-tags: ["Java", "JUC"]
-category: "Backend"
+title: synchronized
+date: '2026-01-25'
+excerpt: synchronized
+tags:
+  - Java
+  - JUC
+category: Backend
 ---
 
 ## synchronized

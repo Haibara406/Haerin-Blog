@@ -1,9 +1,10 @@
 ---
-title: "Markdown 渲染测试"
-date: "2026-03-30"
-excerpt: "测试各种 Markdown 语法的渲染效果，包括所有标题层级"
-tags: ["Test"]
-category: "Test"
+title: Markdown 渲染测试
+date: '2026-03-30'
+excerpt: 测试各种 Markdown 语法的渲染效果，包括所有标题层级
+tags:
+  - Test
+category: Test
 ---
 
 # 一级标题

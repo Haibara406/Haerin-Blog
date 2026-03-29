@@ -1,9 +1,11 @@
 ---
-title: "mybatis"
-date: "2026-02-04"
-excerpt: "Mybatis简介"
-tags: ["Java", "ORM"]
-category: "Backend"
+title: mybatis
+date: '2026-02-04'
+excerpt: Mybatis简介
+tags:
+  - Java
+  - ORM
+category: Backend
 ---
 
 ## Mybatis简介

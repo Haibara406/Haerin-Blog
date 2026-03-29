@@ -1,9 +1,10 @@
 ---
-title: "Java泛型"
-date: "2026-03-06"
-excerpt: "什么是Java中的泛型"
-tags: ["Java"]
-category: "Backend"
+title: Java泛型
+date: '2026-03-06'
+excerpt: 什么是Java中的泛型
+tags:
+  - Java
+category: Backend
 ---
 
 ## 什么是Java中的泛型

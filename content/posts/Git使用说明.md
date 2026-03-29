@@ -1,9 +1,10 @@
 ---
-title: "Git使用说明"
-date: "2025-10-27"
-excerpt: "Git 使用说明"
-tags: ["Git"]
-category: "Backend"
+title: Git使用说明
+date: '2025-10-27'
+excerpt: Git 使用说明
+tags:
+  - Git
+category: Backend
 ---
 
 # Git 使用说明

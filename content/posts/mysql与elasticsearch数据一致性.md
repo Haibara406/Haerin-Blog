@@ -1,9 +1,12 @@
 ---
-title: "mysql与elasticsearch数据一致性"
-date: "2025-10-27"
-excerpt: "目录"
-tags: ["Java", "MySQL", "ElasticSearch"]
-category: "Backend"
+title: mysql与elasticsearch数据一致性
+date: '2025-10-27'
+excerpt: 目录
+tags:
+  - Java
+  - MySQL
+  - ElasticSearch
+category: Backend
 ---
 
 ## 目录

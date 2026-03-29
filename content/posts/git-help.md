@@ -1,9 +1,10 @@
 ---
-title: "git-help"
-date: "2025-12-24"
-excerpt: "🧭 Git 中文速查表"
-tags: ["git"]
-category: "Backend"
+title: git-help
+date: '2025-12-24'
+excerpt: "\U0001F9ED Git 中文速查表"
+tags:
+  - git
+category: Backend
 ---
 
 # 🧭 Git 中文速查表

@@ -1,9 +1,11 @@
 ---
-title: "Executors"
-date: "2025-10-27"
-excerpt: "Executors"
-tags: ["Java", "Executor"]
-category: "Backend"
+title: Executors
+date: '2025-10-27'
+excerpt: Executors
+tags:
+  - Java
+  - Executor
+category: Backend
 ---
 
 ## Executors

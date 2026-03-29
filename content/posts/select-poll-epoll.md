@@ -1,9 +1,10 @@
 ---
-title: "select-poll-epoll"
-date: "2026-02-11"
-excerpt: "select-poll-epoll"
-tags: ["Operating System"]
-category: "Operating System"
+title: select-poll-epoll
+date: '2026-02-11'
+excerpt: select-poll-epoll
+tags:
+  - Operating System
+category: Operating System
 ---
 
 ### 简介

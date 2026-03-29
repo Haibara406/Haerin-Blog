@@ -1,9 +1,10 @@
 ---
-title: "blog_interceptor_vs_aop"
-date: "2025-10-27"
-excerpt: "🛡️ Spring Boot限流架构设计：拦截器vs AOP的技术选型深度解析"
-tags: ["Java"]
-category: "Backend"
+title: blog_interceptor_vs_aop
+date: '2025-10-27'
+excerpt: "\U0001F6E1️ Spring Boot限流架构设计：拦截器vs AOP的技术选型深度解析"
+tags:
+  - Java
+category: Backend
 ---
 
 # 🛡️ Spring Boot限流架构设计：拦截器vs AOP的技术选型深度解析

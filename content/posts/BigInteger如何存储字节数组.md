@@ -1,9 +1,10 @@
 ---
-title: "BigInteger如何存储字节数组"
-date: "2025-12-17"
-excerpt: "📋 目录"
-tags: ["Java"]
-category: "Backend"
+title: BigInteger如何存储字节数组
+date: '2025-12-17'
+excerpt: "\U0001F4CB 目录"
+tags:
+  - Java
+category: Backend
 ---
 
 ## 📋 目录

@@ -1,9 +1,10 @@
 ---
-title: "redis的数据结构"
-date: "2026-03-10"
-excerpt: "简介"
-tags: ["Redis"]
-category: "Database"
+title: redis的数据结构
+date: '2026-03-10'
+excerpt: 简介
+tags:
+  - Redis
+category: Database
 ---
 
 ### 简介

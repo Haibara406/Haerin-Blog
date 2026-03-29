@@ -1,9 +1,11 @@
 ---
-title: "mysql的主从同步机制"
-date: "2026-03-06"
-excerpt: "Mysql的主从同步机制"
-tags: ["InnoDB", "MySQL"]
-category: "Database"
+title: mysql的主从同步机制
+date: '2026-03-06'
+excerpt: Mysql的主从同步机制
+tags:
+  - InnoDB
+  - MySQL
+category: Database
 ---
 
 ## Mysql的主从同步机制

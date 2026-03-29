@@ -1,9 +1,11 @@
 ---
-title: "HTTP常见状态码"
-date: "2026-03-01"
-excerpt: "HTTP常见状态码"
-tags: ["HTTP&HTTPS", "Network"]
-category: "Computer Network"
+title: HTTP常见状态码
+date: '2026-03-01'
+excerpt: HTTP常见状态码
+tags:
+  - HTTP&HTTPS
+  - Network
+category: Computer Network
 ---
 
 ### HTTP常见状态码

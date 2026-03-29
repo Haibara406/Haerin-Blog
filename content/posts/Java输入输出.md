@@ -1,9 +1,10 @@
 ---
-title: "Java输入输出"
-date: "2026-02-26"
-excerpt: "只有输出"
-tags: ["Java"]
-category: "Backend"
+title: Java输入输出
+date: '2026-02-26'
+excerpt: 只有输出
+tags:
+  - Java
+category: Backend
 ---
 
 #### 只有输出

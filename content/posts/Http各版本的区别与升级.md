@@ -1,9 +1,11 @@
 ---
-title: "Http各版本的区别与升级"
-date: "2026-03-02"
-excerpt: "HTTP 1.0"
-tags: ["Network", "HTTP&HTTPS"]
-category: "Computer Network"
+title: Http各版本的区别与升级
+date: '2026-03-02'
+excerpt: HTTP 1.0
+tags:
+  - Network
+  - HTTP&HTTPS
+category: Computer Network
 ---
 
 ### HTTP 1.0

@@ -1,9 +1,11 @@
 ---
-title: "Agent相关问题"
-date: "2026-03-24"
-excerpt: "什么是大模型Agent？他和传统的大模型有什么不同？"
-tags: ["Agent", "AI"]
-category: "Backend"
+title: Agent相关问题
+date: '2026-03-24'
+excerpt: 什么是大模型Agent？他和传统的大模型有什么不同？
+tags:
+  - Agent
+  - AI
+category: Backend
 ---
 
 ### 什么是大模型Agent？他和传统的大模型有什么不同？

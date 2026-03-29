@@ -1,9 +1,10 @@
 ---
-title: "CI:CD流程汇总"
-date: "2025-11-07"
-excerpt: "工作流程："
-tags: ["CI:CD"]
-category: "Backend"
+title: 'CI:CD流程汇总'
+date: '2025-11-07'
+excerpt: 工作流程：
+tags:
+  - 'CI:CD'
+category: Backend
 ---
 
 ## 工作流程：

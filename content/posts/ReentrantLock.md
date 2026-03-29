@@ -1,9 +1,11 @@
 ---
-title: "ReentrantLock"
-date: "2026-02-10"
-excerpt: "CAS"
-tags: ["Java", "JUC"]
-category: "Backend"
+title: ReentrantLock
+date: '2026-02-10'
+excerpt: CAS
+tags:
+  - Java
+  - JUC
+category: Backend
 ---
 
 ## CAS

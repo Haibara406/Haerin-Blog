@@ -1,9 +1,11 @@
 ---
-title: "TCP"
-date: "2026-03-09"
-excerpt: "TCP"
-tags: ["Network", "TCP"]
-category: "Computer Network"
+title: TCP
+date: '2026-03-09'
+excerpt: TCP
+tags:
+  - Network
+  - TCP
+category: Computer Network
 ---
 
 # TCP

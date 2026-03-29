@@ -1,9 +1,11 @@
 ---
-title: "MVCC详解"
-date: "2026-02-16"
-excerpt: "📋 目录"
-tags: ["MySQL", "InnoDB"]
-category: "Database"
+title: MVCC详解
+date: '2026-02-16'
+excerpt: "\U0001F4CB 目录"
+tags:
+  - MySQL
+  - InnoDB
+category: Database
 ---
 
 

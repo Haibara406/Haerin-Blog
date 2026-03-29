@@ -1,9 +1,12 @@
 ---
-title: "springboot启动流程"
-date: "2026-03-18"
-excerpt: "SpringBoot启动流程"
-tags: ["Java", "Spring", "SpringBoot"]
-category: "Backend"
+title: springboot启动流程
+date: '2026-03-18'
+excerpt: SpringBoot启动流程
+tags:
+  - Java
+  - Spring
+  - SpringBoot
+category: Backend
 ---
 
 ### SpringBoot启动流程

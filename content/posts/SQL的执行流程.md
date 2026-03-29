@@ -1,9 +1,10 @@
 ---
-title: "SQL的执行流程"
-date: "2026-02-22"
-excerpt: "对于一条SQL里的select，from，join等语句他们的执行顺序是怎样的？"
-tags: ["MySQL"]
-category: "Database"
+title: SQL的执行流程
+date: '2026-02-22'
+excerpt: 对于一条SQL里的select，from，join等语句他们的执行顺序是怎样的？
+tags:
+  - MySQL
+category: Database
 ---
 
 ### 对于一条SQL里的select，from，join等语句他们的执行顺序是怎样的？

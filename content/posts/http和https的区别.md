@@ -1,9 +1,11 @@
 ---
-title: "http和https的区别"
-date: "2026-02-22"
-excerpt: "http到https的演变"
-tags: ["Network", "HTTP&HTTPS"]
-category: "Computer Network"
+title: http和https的区别
+date: '2026-02-22'
+excerpt: http到https的演变
+tags:
+  - Network
+  - HTTP&HTTPS
+category: Computer Network
 ---
 
 ### http到https的演变

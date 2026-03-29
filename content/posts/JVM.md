@@ -1,9 +1,11 @@
 ---
-title: "JVM"
-date: "2026-02-08"
-excerpt: "JVM"
-tags: ["Java", "JVM"]
-category: "Backend"
+title: JVM
+date: '2026-02-08'
+excerpt: JVM
+tags:
+  - Java
+  - JVM
+category: Backend
 ---
 
 # JVM

@@ -67,10 +67,18 @@ function generateExcerpt(content) {
 
   // 获取第一段非空内容
   const lines = withoutHeaders.split('\n').filter(line => line.trim().length > 0);
-  const excerpt = lines[0] || '';
+  let excerpt = lines[0] || '';
+
+  // 移除 URL
+  excerpt = excerpt.replace(/https?:\/\/[^\s]+/g, '');
 
   // 限制长度
-  return excerpt.length > 150 ? excerpt.substring(0, 150) + '...' : excerpt;
+  excerpt = excerpt.length > 100 ? excerpt.substring(0, 100) : excerpt;
+
+  // 转义特殊字符
+  excerpt = excerpt.replace(/"/g, '\\"');
+
+  return excerpt || '技术笔记';
 }
 
 function formatDate(date) {
@@ -116,6 +124,16 @@ category: "${category}"
 `;
 
   const newContent = frontmatter + content;
+
+  // 验证生成的 YAML
+  try {
+    const yaml = require('js-yaml');
+    yaml.load(frontmatter);
+  } catch (e) {
+    console.log(`❌ YAML 错误: ${filename} - ${e.message}`);
+    return;
+  }
+
   fs.writeFileSync(filepath, newContent, 'utf8');
 
   console.log(`✅ 已处理: ${filename}`);

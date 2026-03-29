@@ -1,9 +1,11 @@
 ---
-title: "redis与mysql 的数据一致性如何保证？"
-date: "2025-12-24"
-excerpt: "如何保证Redis与Mysql的数据一致性？"
-tags: ["Redis", "MySQL"]
-category: "Backend"
+title: redis与mysql 的数据一致性如何保证？
+date: '2025-12-24'
+excerpt: 如何保证Redis与Mysql的数据一致性？
+tags:
+  - Redis
+  - MySQL
+category: Backend
 ---
 
 ## 如何保证Redis与Mysql的数据一致性？

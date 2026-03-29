@@ -1,9 +1,11 @@
 ---
-title: "spring启动流程"
-date: "2025-12-22"
-excerpt: "Spring启动流程"
-tags: ["Java", "Spring"]
-category: "Backend"
+title: spring启动流程
+date: '2025-12-22'
+excerpt: Spring启动流程
+tags:
+  - Java
+  - Spring
+category: Backend
 ---
 
 ### Spring启动流程

@@ -1,9 +1,10 @@
 ---
-title: "常见的JDK版本的新特性"
-date: "2026-03-03"
-excerpt: "JDK8"
-tags: ["Java"]
-category: "Backend"
+title: 常见的JDK版本的新特性
+date: '2026-03-03'
+excerpt: JDK8
+tags:
+  - Java
+category: Backend
 ---
 
 ### JDK8

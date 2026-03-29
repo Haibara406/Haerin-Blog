@@ -1,9 +1,11 @@
 ---
-title: "spring事务的传播行为"
-date: "2026-02-03"
-excerpt: "Spring事务的传播行为"
-tags: ["Java", "Spring"]
-category: "Backend"
+title: spring事务的传播行为
+date: '2026-02-03'
+excerpt: Spring事务的传播行为
+tags:
+  - Java
+  - Spring
+category: Backend
 ---
 
 ## Spring事务的传播行为

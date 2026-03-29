@@ -1,9 +1,10 @@
 ---
-title: "redis pipeline"
-date: "2026-01-14"
-excerpt: "Pipeline"
-tags: ["Redis"]
-category: "Database"
+title: redis pipeline
+date: '2026-01-14'
+excerpt: Pipeline
+tags:
+  - Redis
+category: Database
 ---
 
 ## Pipeline

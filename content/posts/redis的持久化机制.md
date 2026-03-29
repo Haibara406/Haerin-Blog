@@ -1,9 +1,10 @@
 ---
-title: "redis的持久化机制"
-date: "2026-02-11"
-excerpt: "Redis的持久化机制"
-tags: ["Redis"]
-category: "Database"
+title: redis的持久化机制
+date: '2026-02-11'
+excerpt: Redis的持久化机制
+tags:
+  - Redis
+category: Database
 ---
 
 ## Redis的持久化机制
