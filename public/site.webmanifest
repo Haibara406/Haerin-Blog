@@ -1,0 +1,14 @@
+{
+  "name": "Haerin Blog",
+  "short_name": "Haerin",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ],
+  "theme_color": "#171717",
+  "background_color": "#ffffff",
+  "display": "standalone"
+}
