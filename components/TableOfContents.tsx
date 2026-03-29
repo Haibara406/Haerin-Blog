@@ -13,8 +13,8 @@ export default function TableOfContents({ content }: { content: string }) {
   const [activeId, setActiveId] = useState<string>('')
 
   useEffect(() => {
-    // 从内容中提取标题
-    const headings = Array.from(document.querySelectorAll('.prose h2, .prose h3'))
+    // 从内容中提取标题 (h1, h2, h3)
+    const headings = Array.from(document.querySelectorAll('.prose h1, .prose h2, .prose h3'))
     const tocItems: TOCItem[] = headings.map((heading) => ({
       id: heading.id,
       text: heading.textContent || '',
@@ -63,7 +63,7 @@ export default function TableOfContents({ content }: { content: string }) {
         {toc.map((item) => (
           <li
             key={item.id}
-            style={{ paddingLeft: `${(item.level - 2) * 12}px` }}
+            style={{ paddingLeft: `${(item.level - 1) * 12}px` }}
           >
             <button
               onClick={() => handleClick(item.id)}
