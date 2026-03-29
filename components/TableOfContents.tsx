@@ -121,7 +121,7 @@ export default function TableOfContents({ content }: { content: string }) {
           {/* 标题文本 */}
           <button
             onClick={() => handleClick(item.id)}
-            className={`flex-1 text-left py-1 px-2 rounded transition-all duration-200 text-sm ${
+            className={`flex-1 text-left py-1 px-2 rounded transition-all duration-200 text-sm truncate ${
               hasChildren ? '' : 'ml-4'
             } ${
               isActive
@@ -131,6 +131,7 @@ export default function TableOfContents({ content }: { content: string }) {
             style={{
               paddingLeft: hasChildren ? '0.5rem' : `${depth * 0.75 + 0.5}rem`
             }}
+            title={item.text}
           >
             {item.text}
           </button>
@@ -149,9 +150,9 @@ export default function TableOfContents({ content }: { content: string }) {
   if (toc.length === 0) return null
 
   return (
-    <aside className="hidden xl:block w-64 flex-shrink-0">
-      <div className="sticky top-32 max-h-[calc(100vh-200px)] overflow-y-auto">
-        <div className="text-sm font-semibold mb-4 text-gray-900 dark:text-gray-100 px-2">
+    <aside className="hidden lg:block w-64 flex-shrink-0">
+      <div className="sticky top-32 max-h-[calc(100vh-200px)] overflow-y-auto pr-4">
+        <div className="text-sm font-semibold mb-4 text-gray-900 dark:text-gray-100">
           目录
         </div>
         <ul className="space-y-1">
