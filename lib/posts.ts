@@ -19,6 +19,7 @@ export interface Post {
   slug: string
   title: string
   date: string
+  updated?: string
   excerpt: string
   content: string
   tags?: string[]
@@ -49,6 +50,7 @@ export function getAllPosts(): Omit<Post, 'content'>[] {
         slug,
         title: data.title || '',
         date: data.date || '',
+        updated: data.updated,
         excerpt: data.excerpt || '',
         tags: data.tags || [],
         category: data.category || 'Uncategorized',
@@ -81,6 +83,7 @@ export function getPostBySlug(slug: string): Post | null {
       slug,
       title: data.title || '',
       date: data.date || '',
+      updated: data.updated,
       excerpt: data.excerpt || '',
       content: contentHtml,
       tags: data.tags || [],

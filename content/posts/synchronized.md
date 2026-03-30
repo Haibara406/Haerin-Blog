@@ -1,6 +1,7 @@
 ---
 title: synchronized
-date: '2026-01-25'
+date: '2026-01-05 14:17'
+updated: '2026-03-29 22:32'
 excerpt: 深入讲解synchronized的实现原理，包括对象头Mark Word结构及偏向锁、轻量级锁、重量级锁的升级过程。
 tags:
   - Java

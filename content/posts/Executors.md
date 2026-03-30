@@ -1,6 +1,7 @@
 ---
 title: Executors
-date: '2025-10-27'
+date: '2025-10-27 21:38'
+updated: '2026-03-29 22:32'
 excerpt: 介绍Java中Executors提供的四种常用线程池类型、特点、适用场景及其底层实现原理。
 tags:
   - Java

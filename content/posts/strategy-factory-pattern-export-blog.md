@@ -1,6 +1,7 @@
 ---
 title: strategy-factory-pattern-export-blog
-date: '2025-10-27'
+date: '2025-10-27 21:38'
+updated: '2026-03-29 22:32'
 excerpt: 通过导出功能的重构实践，讲解策略模式与工厂模式组合使用的设计思路与代码实现。
 tags:
   - Java

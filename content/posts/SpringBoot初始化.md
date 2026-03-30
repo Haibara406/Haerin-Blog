@@ -1,6 +1,7 @@
 ---
 title: SpringBoot初始化
-date: '2026-03-18'
+date: '2025-10-27 21:38'
+updated: '2026-03-29 22:32'
 excerpt: 介绍SpringBoot中@PostConstruct、InitializingBean、ApplicationRunner等常见初始化方式的特点与使用场景。
 tags:
   - Spring

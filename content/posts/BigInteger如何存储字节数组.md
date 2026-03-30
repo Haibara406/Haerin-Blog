@@ -1,6 +1,7 @@
 ---
 title: BigInteger如何存储字节数组
-date: '2025-12-17'
+date: '2025-10-27 21:38'
+updated: '2026-03-29 22:32'
 excerpt: 深入解析BigInteger如何通过符号位和字节数组存储大整数，并追踪其底层源码实现。
 tags:
   - Java

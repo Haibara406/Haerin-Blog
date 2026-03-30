@@ -1,6 +1,7 @@
 ---
 title: http和https的区别
-date: '2026-02-22'
+date: '2026-02-20 10:31'
+updated: '2026-03-29 22:32'
 excerpt: 从加密、防篡改、CA证书三个维度讲解HTTP到HTTPS的演变，以及TLS握手的完整流程。
 tags:
   - HTTP

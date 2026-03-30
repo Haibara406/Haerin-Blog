@@ -1,6 +1,7 @@
 ---
 title: ReentrantLock
-date: '2026-02-10'
+date: '2026-01-07 13:26'
+updated: '2026-03-29 22:32'
 excerpt: 深入讲解CAS原理、ABA问题解决方案、总线风暴，以及ReentrantLock的底层实现机制。
 tags:
   - Java

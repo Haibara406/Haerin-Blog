@@ -1,6 +1,7 @@
 ---
 title: IO模型
-date: '2026-02-04'
+date: '2025-12-28 16:45'
+updated: '2026-03-29 22:32'
 excerpt: 从socket与fd出发，详解Linux网络IO的基础概念及BIO、NIO等IO模型的工作原理。
 tags:
   - IO

@@ -1,6 +1,7 @@
 ---
 title: 如何使用MYSQL中的EXPLAIN
-date: '2026-02-22'
+date: '2026-02-22 14:20'
+updated: '2026-03-29 22:32'
 excerpt: 详解MySQL EXPLAIN各字段的含义，重点介绍type、key、Extra等关键字段的分析方法。
 tags:
   - MySQL

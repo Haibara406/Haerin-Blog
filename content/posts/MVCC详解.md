@@ -1,6 +1,7 @@
 ---
 title: MVCC详解
-date: '2026-02-16'
+date: '2025-10-27 21:38'
+updated: '2026-03-29 22:32'
 excerpt: 深入讲解MySQL MVCC的实现原理，包括版本链、ReadView机制及不同隔离级别下的可见性判断。
 tags:
   - MySQL

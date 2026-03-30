@@ -1,6 +1,7 @@
 ---
 title: Mysql窗口函数
-date: '2026-02-17'
+date: '2026-02-17 12:44'
+updated: '2026-03-29 22:32'
 excerpt: 介绍MySQL窗口函数的用法，包括row_number、rank、dense_rank等排名函数及TopN查询技巧。
 tags:
   - MySQL

@@ -1,6 +1,7 @@
 ---
 title: ThreadLocal
-date: '2026-03-09'
+date: '2025-12-25 23:47'
+updated: '2026-03-29 22:32'
 excerpt: 深入解析ThreadLocal的get/set实现、内存泄漏原因、正确使用姿势及与HashMap的对比。
 tags:
   - Java

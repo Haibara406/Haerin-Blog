@@ -1,6 +1,7 @@
 ---
 title: MinioUtils
-date: '2025-10-27'
+date: '2025-10-27 21:38'
+updated: '2026-03-29 22:32'
 excerpt: 提供基于MinIO的通用文件上传工具类，支持多种上传方式、批量操作和预签名URL生成。
 tags:
   - Java

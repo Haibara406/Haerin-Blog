@@ -1,6 +1,7 @@
 ---
 title: mybatis
-date: '2026-02-04'
+date: '2026-01-29 13:52'
+updated: '2026-03-29 22:32'
 excerpt: 介绍MyBatis的核心思想与工作原理，并与Hibernate进行全面对比，分析各自的适用场景。
 tags:
   - Java

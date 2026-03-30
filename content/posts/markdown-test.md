@@ -1,6 +1,7 @@
 ---
 title: Markdown 渲染测试
 date: '2026-03-30'
+updated: '2026-03-30'
 excerpt: 测试博客系统对各种Markdown语法的渲染效果，包括标题、表格、代码块、图片等元素。
 tags:
   - Test

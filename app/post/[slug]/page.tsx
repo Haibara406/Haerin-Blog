@@ -37,8 +37,16 @@ export default function Post({ params }: { params: { slug: string } }) {
             <header className="mb-12 sm:mb-16 animate-fade-in">
               <div className="mb-4 sm:mb-6 flex flex-wrap items-center gap-3 sm:gap-4">
                 <time className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">
-                  {post.date}
+                  发布: {post.date}
                 </time>
+                {post.updated && (
+                  <>
+                    <span className="text-gray-300 dark:text-gray-700">•</span>
+                    <time className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">
+                      更新: {post.updated}
+                    </time>
+                  </>
+                )}
                 {post.category && (
                   <>
                     <span className="text-gray-300 dark:text-gray-700">•</span>

@@ -1,6 +1,7 @@
 ---
 title: 常见的JDK版本的新特性
-date: '2026-03-03'
+date: '2026-03-02 19:02'
+updated: '2026-03-29 22:32'
 excerpt: 梳理JDK 8、17、21等主要版本的核心新特性，包括Lambda、虚拟线程、Record等重要改进。
 tags:
   - Java

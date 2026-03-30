@@ -1,6 +1,7 @@
 ---
 title: redis
-date: '2026-02-25'
+date: '2025-12-23 15:51'
+updated: '2026-03-29 22:32'
 excerpt: 深入介绍Redis Cluster的分片、Gossip协议、MOVED/ASK重定向机制及客户端路由原理。
 tags:
   - Redis

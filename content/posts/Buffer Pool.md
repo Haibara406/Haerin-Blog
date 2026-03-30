@@ -1,6 +1,7 @@
 ---
 title: Buffer Pool
-date: '2025-10-27'
+date: '2025-10-27 21:38'
+updated: '2026-03-29 22:32'
 excerpt: 详解MySQL InnoDB的Buffer Pool原理，包括Free链表、Flush链表、LRU冷热分离等核心机制。
 tags:
   - MySQL

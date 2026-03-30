@@ -1,6 +1,7 @@
 ---
 title: Agent相关问题
-date: '2026-03-24'
+date: '2026-03-10 21:52'
+updated: '2026-03-29 22:32'
 excerpt: 介绍大模型Agent的架构、工作流程、与传统模型的区别，以及Function Calling与MCP协议的对比。
 tags:
   - Agent

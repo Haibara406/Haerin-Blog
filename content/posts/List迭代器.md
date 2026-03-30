@@ -1,6 +1,7 @@
 ---
 title: List迭代器
-date: '2026-03-05'
+date: '2026-03-05 15:29'
+updated: '2026-03-29 22:32'
 excerpt: 介绍Java Iterator的使用方式，以及fail-fast与fail-safe两种集合遍历策略的原理与区别。
 tags:
   - Java

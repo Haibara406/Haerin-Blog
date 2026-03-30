@@ -1,6 +1,7 @@
 ---
 title: springboot启动流程
-date: '2026-03-18'
+date: '2025-12-22 13:06'
+updated: '2026-03-29 22:32'
 excerpt: 详解SpringBoot启动的两大阶段：创建SpringApplication实例与执行run方法的完整流程。
 tags:
   - Spring

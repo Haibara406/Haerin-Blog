@@ -1,6 +1,7 @@
 ---
 title: redis与mysql 的数据一致性如何保证？
-date: '2025-12-24'
+date: '2025-12-24 17:16'
+updated: '2026-03-29 22:32'
 excerpt: 分析六种Redis与MySQL数据一致性方案的优缺点，推荐先写数据库再删缓存的实践策略。
 tags:
   - Redis

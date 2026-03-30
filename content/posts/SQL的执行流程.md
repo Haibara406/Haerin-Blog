@@ -1,6 +1,7 @@
 ---
 title: SQL的执行流程
-date: '2026-02-22'
+date: '2026-02-22 11:44'
+updated: '2026-03-29 22:32'
 excerpt: 详解SQL语句中各子句的执行顺序，以及MySQL Server层与存储引擎层的完整执行流程。
 tags:
   - MySQL

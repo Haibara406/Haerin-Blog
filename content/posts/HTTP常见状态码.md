@@ -1,6 +1,7 @@
 ---
 title: HTTP常见状态码
-date: '2026-03-01'
+date: '2026-03-01 11:37'
+updated: '2026-03-29 22:32'
 excerpt: 系统整理HTTP 1xx到5xx各类状态码的含义与常见使用场景，便于快速查阅。
 tags:
   - HTTP

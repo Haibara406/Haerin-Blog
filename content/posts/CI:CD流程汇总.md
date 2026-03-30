@@ -1,6 +1,7 @@
 ---
 title: 'CI:CD流程汇总'
-date: '2025-11-07'
+date: '2025-11-07 17:15'
+updated: '2026-03-29 22:32'
 excerpt: 记录从本地开发到服务器部署的完整CI/CD流程，涵盖Gitee同步GitHub、Actions配置与Secrets管理。
 tags:
   - CI/CD
