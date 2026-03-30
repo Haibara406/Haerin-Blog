@@ -3,7 +3,7 @@ title: redis
 date: '2026-02-25'
 excerpt: 深入介绍Redis Cluster的分片、Gossip协议、MOVED/ASK重定向机制及客户端路由原理。
 tags:
-  - Redis"
+  - Redis
 category: Database
 ---
 

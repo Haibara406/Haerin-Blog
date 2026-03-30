@@ -4,6 +4,7 @@ date: '2026-02-27'
 excerpt: 系统梳理MySQL InnoDB的锁体系，包括行锁、表锁、意向锁、MDL锁及间隙锁的原理与应用。
 tags:
   - MySQL
+  - InnoDB
 category: Database
 ---
 

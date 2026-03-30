@@ -3,8 +3,8 @@ title: mysql事务的二阶段提交
 date: '2026-01-14'
 excerpt: 讲解MySQL事务二阶段提交的原理，分析redo log与binlog的区别及崩溃恢复的一致性保障机制。
 tags:
-  - InnoDB
   - MySQL
+  - InnoDB
 category: Database
 ---
 

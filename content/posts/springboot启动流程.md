@@ -3,7 +3,6 @@ title: springboot启动流程
 date: '2026-03-18'
 excerpt: 详解SpringBoot启动的两大阶段：创建SpringApplication实例与执行run方法的完整流程。
 tags:
-  - Java
   - Spring
   - SpringBoot
 category: Backend

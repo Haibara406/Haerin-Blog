@@ -3,8 +3,8 @@ title: git-help
 date: '2025-12-24'
 excerpt: Git常用命令速查表，涵盖分支操作、提交撤销、远程同步等高频场景，附中文注释。
 tags:
-  - git
-category: Backend
+  - Git
+category: DevOps
 ---
 
 # 🧭 Git 中文速查表

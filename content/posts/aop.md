@@ -3,9 +3,8 @@ title: aop
 date: '2026-03-24'
 excerpt: 详解Spring AOP的实现原理，包括代理创建流程、JDK与CGLIB的选择及Advice执行链机制。
 tags:
-  - Java
   - Spring
-  - SpringBoot
+  - AOP
 category: Backend
 ---
 

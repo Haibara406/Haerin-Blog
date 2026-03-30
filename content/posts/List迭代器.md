@@ -4,6 +4,7 @@ date: '2026-03-05'
 excerpt: 介绍Java Iterator的使用方式，以及fail-fast与fail-safe两种集合遍历策略的原理与区别。
 tags:
   - Java
+  - Collection
 category: Backend
 ---
 

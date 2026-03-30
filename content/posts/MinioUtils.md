@@ -4,7 +4,7 @@ date: '2025-10-27'
 excerpt: 提供基于MinIO的通用文件上传工具类，支持多种上传方式、批量操作和预签名URL生成。
 tags:
   - Java
-  - Minio
+  - MinIO
 category: Backend
 ---
 

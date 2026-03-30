@@ -3,7 +3,6 @@ title: spring启动流程
 date: '2025-12-22'
 excerpt: 梳理Spring容器从创建ApplicationContext到Bean初始化完成的完整启动流程与各阶段扩展点。
 tags:
-  - Java
   - Spring
 category: Backend
 ---

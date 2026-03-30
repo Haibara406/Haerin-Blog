@@ -3,8 +3,8 @@ title: Http各版本的区别与升级
 date: '2026-03-02'
 excerpt: 对比HTTP 1.0到HTTP/3各版本的核心改进，包括多路复用、头部压缩、QUIC协议等演进历程。
 tags:
+  - HTTP
   - Network
-  - HTTP&HTTPS
 category: Computer Network
 ---
 

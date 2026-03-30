@@ -3,7 +3,9 @@ title: select-poll-epoll
 date: '2026-02-11'
 excerpt: 对比select、poll、epoll三种IO多路复用机制的原理、性能差异及适用场景。
 tags:
-  - Operating System
+  - Linux
+  - IO
+  - Network
 category: Operating System
 ---
 

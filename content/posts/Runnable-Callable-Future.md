@@ -4,7 +4,7 @@ date: '2026-03-02'
 excerpt: 对比Runnable、Callable、Future三者的区别，并详解FutureTask的状态机与cancel/get方法实现。
 tags:
   - Java
-  - Thread
+  - JUC
 category: Backend
 ---
 

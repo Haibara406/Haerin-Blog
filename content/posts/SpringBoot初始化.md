@@ -3,7 +3,6 @@ title: SpringBoot初始化
 date: '2026-03-18'
 excerpt: 介绍SpringBoot中@PostConstruct、InitializingBean、ApplicationRunner等常见初始化方式的特点与使用场景。
 tags:
-  - Java
   - Spring
   - SpringBoot
 category: Backend

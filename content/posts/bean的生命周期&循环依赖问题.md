@@ -3,7 +3,6 @@ title: bean的生命周期&循环依赖问题
 date: '2026-02-04'
 excerpt: 详细介绍Spring Bean从实例化到销毁的完整生命周期，以及各阶段的扩展点与循环依赖解决方案。
 tags:
-  - Java
   - Spring
   - SpringBoot
 category: Backend

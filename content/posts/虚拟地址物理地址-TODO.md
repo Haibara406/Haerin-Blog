@@ -4,6 +4,7 @@ date: '2026-03-04'
 excerpt: 讲解虚拟地址与物理地址的区别、MMU地址转换流程，以及分页与分段两种内存管理方式。
 tags:
   - Operating System
+  - Memory
 category: Operating System
 ---
 

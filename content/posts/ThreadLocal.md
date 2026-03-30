@@ -3,8 +3,8 @@ title: ThreadLocal
 date: '2026-03-09'
 excerpt: 深入解析ThreadLocal的get/set实现、内存泄漏原因、正确使用姿势及与HashMap的对比。
 tags:
-  - Thread
   - Java
+  - JUC
 category: Backend
 ---
 

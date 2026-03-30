@@ -5,7 +5,7 @@ excerpt: 介绍大模型Agent的架构、工作流程、与传统模型的区别
 tags:
   - Agent
   - AI
-category: Backend
+category: AI
 ---
 
 ### 什么是大模型Agent？他和传统的大模型有什么不同？

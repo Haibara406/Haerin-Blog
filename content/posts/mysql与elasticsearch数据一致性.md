@@ -3,10 +3,9 @@ title: mysql与elasticsearch数据一致性
 date: '2025-10-27'
 excerpt: 对比同步双写、异步双写、Binlog同步等四种MySQL与Elasticsearch数据同步方案的优缺点。
 tags:
-  - Java
   - MySQL
   - ElasticSearch
-category: Backend
+category: Database
 ---
 
 ## 目录

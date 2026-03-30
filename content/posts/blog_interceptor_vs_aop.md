@@ -3,7 +3,8 @@ title: blog_interceptor_vs_aop
 date: '2025-10-27'
 excerpt: 深度对比Spring Boot中拦截器与AOP在限流场景下的技术选型，分析执行时机与架构差异。
 tags:
-  - Java
+  - Spring
+  - AOP
 category: Backend
 ---
 
