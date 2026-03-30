@@ -67,20 +67,28 @@ export default function Friends() {
 
           <div className="grid sm:grid-cols-2 gap-4 pl-6">
             <div>
-              <div className="text-sm text-gray-500 dark:text-gray-500 uppercase tracking-wider mb-1">Site Name</div>
+              <div className="text-sm text-gray-500 dark:text-gray-500 uppercase tracking-wider mb-1">
+                {t('friends.apply.siteName')}
+              </div>
               <div className="text-lg">Haerin Blog</div>
             </div>
             <div>
-              <div className="text-sm text-gray-500 dark:text-gray-500 uppercase tracking-wider mb-1">Avatar</div>
+              <div className="text-sm text-gray-500 dark:text-gray-500 uppercase tracking-wider mb-1">
+                {t('friends.apply.avatar')}
+              </div>
               <div className="text-lg">/avatar.png</div>
             </div>
             <div className="sm:col-span-2">
-              <div className="text-sm text-gray-500 dark:text-gray-500 uppercase tracking-wider mb-1">Site URL</div>
+              <div className="text-sm text-gray-500 dark:text-gray-500 uppercase tracking-wider mb-1">
+                {t('friends.apply.siteUrl')}
+              </div>
               <div className="text-lg">https://haibara406.github.io/Haerin-Blog/</div>
             </div>
             <div className="sm:col-span-2">
-              <div className="text-sm text-gray-500 dark:text-gray-500 uppercase tracking-wider mb-1">Site Description</div>
-              <div className="text-lg">Recording technology and life</div>
+              <div className="text-sm text-gray-500 dark:text-gray-500 uppercase tracking-wider mb-1">
+                {t('friends.apply.siteDesc')}
+              </div>
+              <div className="text-lg">{t('friends.apply.siteDescValue')}</div>
             </div>
           </div>
 

@@ -228,14 +228,6 @@ export default function AboutClient({ stats }: { stats: Stats }) {
                 {t('about.stats.categories')}
               </div>
             </div>
-            <div className="text-center group">
-              <div className="text-6xl font-light mb-2 group-hover:scale-110 transition-transform duration-300">
-                -
-              </div>
-              <div className="text-sm text-gray-500 dark:text-gray-500 uppercase tracking-widest">
-                Visitors
-              </div>
-            </div>
           </div>
         </div>
       </section>
