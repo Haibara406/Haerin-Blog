@@ -2,9 +2,11 @@
 
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
+import { useLanguage } from './LanguageProvider'
 
 export default function BackButton() {
   const router = useRouter()
+  const { t } = useLanguage()
   const [canGoBack, setCanGoBack] = useState(false)
 
   useEffect(() => {
@@ -41,7 +43,7 @@ export default function BackButton() {
           d="M15 19l-7-7 7-7"
         />
       </svg>
-      Back
+      {t('post.back')}
     </button>
   )
 }

@@ -5,19 +5,22 @@ import { useTheme } from './ThemeProvider'
 export default function ThemeToggle() {
   const { theme, actualTheme, setTheme } = useTheme()
 
-  const cycleTheme = (e: React.MouseEvent<HTMLButtonElement>) => {
-    if (theme === 'light') setTheme('dark', e)
-    else if (theme === 'dark') setTheme('system', e)
-    else setTheme('light', e)
+  const toggleTheme = (e: React.MouseEvent<HTMLButtonElement>) => {
+    // 简化为只在 light 和 dark 之间切换
+    if (actualTheme === 'light') {
+      setTheme('dark', e)
+    } else {
+      setTheme('light', e)
+    }
   }
 
   return (
     <button
-      onClick={cycleTheme}
+      onClick={toggleTheme}
       className="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center
-                 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200 relative group"
+                 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200"
       aria-label="Toggle theme"
-      title={theme === 'system' ? 'System theme' : theme === 'light' ? 'Light theme' : 'Dark theme'}
+      title={actualTheme === 'light' ? 'Switch to dark mode' : 'Switch to light mode'}
     >
       {actualTheme === 'light' ? (
         <svg
@@ -47,9 +50,6 @@ export default function ThemeToggle() {
             d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
           />
         </svg>
-      )}
-      {theme === 'system' && (
-        <span className="absolute -bottom-1 -right-1 w-3 h-3 bg-blue-500 rounded-full border-2 border-white dark:border-gray-900" />
       )}
     </button>
   )

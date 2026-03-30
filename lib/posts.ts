@@ -15,6 +15,19 @@ import rehypeRaw from 'rehype-raw'
 
 const postsDirectory = path.join(process.cwd(), 'content/posts')
 
+// 计算阅读时长（基于平均阅读速度 200 字/分钟）
+function calculateReadingTime(content: string): number {
+  const wordsPerMinute = 200
+  const wordCount = content.length
+  const minutes = Math.ceil(wordCount / wordsPerMinute)
+  return minutes
+}
+
+// 计算字数（包括中英文）
+function calculateWordCount(content: string): number {
+  return content.length
+}
+
 export interface Post {
   slug: string
   title: string
@@ -24,6 +37,8 @@ export interface Post {
   content: string
   tags?: string[]
   category?: string
+  readingTime?: number // 阅读时长（分钟）
+  wordCount?: number // 字数统计
 }
 
 export interface TableOfContents {
@@ -44,7 +59,10 @@ export function getAllPosts(): Omit<Post, 'content'>[] {
       const slug = fileName.replace(/\.md$/, '')
       const fullPath = path.join(postsDirectory, fileName)
       const fileContents = fs.readFileSync(fullPath, 'utf8')
-      const { data } = matter(fileContents)
+      const { data, content } = matter(fileContents)
+
+      const readingTime = calculateReadingTime(content)
+      const wordCount = calculateWordCount(content)
 
       return {
         slug,
@@ -54,6 +72,8 @@ export function getAllPosts(): Omit<Post, 'content'>[] {
         excerpt: data.excerpt || '',
         tags: data.tags || [],
         category: data.category || 'Uncategorized',
+        readingTime,
+        wordCount,
       }
     })
 
@@ -78,6 +98,8 @@ export function getPostBySlug(slug: string): Post | null {
       .processSync(content)
 
     const contentHtml = processedContent.toString()
+    const readingTime = calculateReadingTime(content)
+    const wordCount = calculateWordCount(content)
 
     return {
       slug,
@@ -88,6 +110,8 @@ export function getPostBySlug(slug: string): Post | null {
       content: contentHtml,
       tags: data.tags || [],
       category: data.category || 'Uncategorized',
+      readingTime,
+      wordCount,
     }
   } catch (error) {
     return null

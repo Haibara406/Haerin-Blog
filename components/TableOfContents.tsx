@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 interface TOCItem {
   id: string
@@ -13,10 +13,15 @@ export default function TableOfContents({ content }: { content: string }) {
   const [toc, setToc] = useState<TOCItem[]>([])
   const [activeId, setActiveId] = useState<string>('')
   const [collapsed, setCollapsed] = useState<Set<string>>(new Set())
+  const tocListRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     // 从内容中提取所有标题 (h1-h6)
-    const headings = Array.from(document.querySelectorAll('.prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6'))
+    const headings = Array.from(
+      document.querySelectorAll<HTMLElement>(
+        '.prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6'
+      )
+    ).filter((heading) => heading.id)
 
     // 构建树形结构
     const buildTree = (headings: Element[]): TOCItem[] => {
@@ -51,22 +56,66 @@ export default function TableOfContents({ content }: { content: string }) {
 
     const tree = buildTree(headings)
     setToc(tree)
+    if (headings.length === 0) {
+      setActiveId('')
+      return
+    }
 
-    // 监听滚动，高亮当前标题
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveId(entry.target.id)
-          }
-        })
-      },
-      { rootMargin: '-100px 0px -80% 0px' }
-    )
+    const updateActiveHeading = () => {
+      const offset = 140
+      let currentActiveId = headings[0].id
 
-    headings.forEach((heading) => observer.observe(heading))
-    return () => observer.disconnect()
+      for (const heading of headings) {
+        if (heading.getBoundingClientRect().top - offset <= 0) {
+          currentActiveId = heading.id
+        } else {
+          break
+        }
+      }
+
+      setActiveId(currentActiveId)
+    }
+
+    let ticking = false
+    const handleScroll = () => {
+      if (ticking) return
+      ticking = true
+      window.requestAnimationFrame(() => {
+        updateActiveHeading()
+        ticking = false
+      })
+    }
+
+    updateActiveHeading()
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    window.addEventListener('resize', handleScroll)
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+      window.removeEventListener('resize', handleScroll)
+    }
   }, [content])
+
+  useEffect(() => {
+    if (!activeId) return
+    const container = tocListRef.current
+    if (!container) return
+
+    const activeButton = Array.from(
+      container.querySelectorAll<HTMLButtonElement>('button[data-toc-id]')
+    ).find((button) => button.dataset.tocId === activeId)
+
+    if (!activeButton) return
+
+    const containerRect = container.getBoundingClientRect()
+    const buttonRect = activeButton.getBoundingClientRect()
+    const outOfView =
+      buttonRect.top < containerRect.top || buttonRect.bottom > containerRect.bottom
+
+    if (outOfView) {
+      activeButton.scrollIntoView({ block: 'nearest', behavior: 'smooth' })
+    }
+  }, [activeId])
 
   const handleClick = (id: string) => {
     const element = document.getElementById(id)
@@ -98,6 +147,10 @@ export default function TableOfContents({ content }: { content: string }) {
     const isCollapsed = collapsed.has(item.id)
     const isActive = activeId === item.id
 
+    // 限制缩进深度，避免六级标题缩进过多
+    const maxDepth = 3
+    const effectiveDepth = Math.min(depth, maxDepth)
+
     return (
       <li key={item.id} className="relative">
         <div className="flex items-start group">
@@ -121,6 +174,7 @@ export default function TableOfContents({ content }: { content: string }) {
           {/* 标题文本 */}
           <button
             onClick={() => handleClick(item.id)}
+            data-toc-id={item.id}
             className={`flex-1 text-left py-1 px-2 rounded transition-all duration-200 text-sm truncate ${
               hasChildren ? '' : 'ml-4'
             } ${
@@ -129,7 +183,7 @@ export default function TableOfContents({ content }: { content: string }) {
                 : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-800'
             }`}
             style={{
-              paddingLeft: hasChildren ? '0.5rem' : `${depth * 0.75 + 0.5}rem`
+              paddingLeft: hasChildren ? '0.5rem' : `${effectiveDepth * 0.5 + 0.5}rem`
             }}
             title={item.text}
           >
@@ -150,14 +204,21 @@ export default function TableOfContents({ content }: { content: string }) {
   if (toc.length === 0) return null
 
   return (
-    <aside className="hidden lg:block w-64 flex-shrink-0">
-      <div className="sticky top-32 max-h-[calc(100vh-200px)] overflow-y-auto pr-4">
-        <div className="text-sm font-semibold mb-4 text-gray-900 dark:text-gray-100">
-          目录
+    <aside className="hidden lg:block w-80 flex-shrink-0">
+      <div className="sticky top-24">
+        {/* 优雅的标题 */}
+        <div className="mb-6 pb-3 border-b border-gray-200 dark:border-gray-800">
+          <h3 className="text-sm font-semibold tracking-wider uppercase text-gray-900 dark:text-gray-100 opacity-60">
+            目录
+          </h3>
         </div>
-        <ul className="space-y-1">
-          {toc.map((item) => renderTOCItem(item))}
-        </ul>
+
+        {/* 目录内容 - 不再固定，随页面滚动 */}
+        <div ref={tocListRef} className="pr-2 max-h-[calc(100vh-8rem)] overflow-y-auto custom-scrollbar">
+          <ul className="space-y-1">
+            {toc.map((item) => renderTOCItem(item))}
+          </ul>
+        </div>
       </div>
     </aside>
   )
