@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import BlogCard from '@/components/BlogCard'
 import { useLanguage } from '@/components/LanguageProvider'
 
@@ -18,6 +18,53 @@ const POSTS_PER_PAGE = 10
 export default function HomeClient({ posts }: { posts: Omit<Post, 'content'>[] }) {
   const { t } = useLanguage()
   const [currentPage, setCurrentPage] = useState(1)
+  const [displayedText, setDisplayedText] = useState('')
+  const [isDeleting, setIsDeleting] = useState(false)
+  const [showCursor, setShowCursor] = useState(true)
+  const [isPaused, setIsPaused] = useState(false)
+
+  const fullText = t('home.hero.title')
+
+  // 光标闪烁效果
+  useEffect(() => {
+    const cursorInterval = setInterval(() => {
+      setShowCursor(prev => !prev)
+    }, 500)
+    return () => clearInterval(cursorInterval)
+  }, [])
+
+  useEffect(() => {
+    if (isPaused) {
+      const pauseTimeout = setTimeout(() => {
+        setIsPaused(false)
+        if (displayedText.length === fullText.length) {
+          setIsDeleting(true)
+        }
+      }, 2000) // 暂停2秒
+      return () => clearTimeout(pauseTimeout)
+    }
+
+    if (isDeleting) {
+      if (displayedText.length === 0) {
+        setIsDeleting(false)
+        setIsPaused(true)
+        return
+      }
+      const timeout = setTimeout(() => {
+        setDisplayedText(displayedText.slice(0, -1))
+      }, 50)
+      return () => clearTimeout(timeout)
+    } else {
+      if (displayedText.length === fullText.length) {
+        setIsPaused(true)
+        return
+      }
+      const timeout = setTimeout(() => {
+        setDisplayedText(fullText.slice(0, displayedText.length + 1))
+      }, 80)
+      return () => clearTimeout(timeout)
+    }
+  }, [displayedText, fullText, isDeleting, isPaused])
 
   const totalPages = Math.ceil(posts.length / POSTS_PER_PAGE)
   const startIndex = (currentPage - 1) * POSTS_PER_PAGE
@@ -34,8 +81,9 @@ export default function HomeClient({ posts }: { posts: Omit<Post, 'content'>[] }
       {/* Hero Section */}
       <section className="mb-20 sm:mb-32 animate-fade-in">
         <div className="max-w-3xl">
-          <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light mb-4 sm:mb-6 tracking-tight leading-tight whitespace-pre-line">
-            {t('home.hero.title')}
+          <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light mb-4 sm:mb-6 tracking-tight leading-tight whitespace-pre-line min-h-[200px]">
+            {displayedText}
+            <span className={`inline-block w-1 h-[0.8em] bg-gray-900 dark:bg-gray-100 ml-1 ${showCursor ? 'opacity-100' : 'opacity-0'} transition-opacity duration-100`}></span>
           </h1>
           <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-400 leading-relaxed">
             {t('home.hero.subtitle')}
@@ -48,7 +96,7 @@ export default function HomeClient({ posts }: { posts: Omit<Post, 'content'>[] }
         <h2 className="font-serif text-2xl sm:text-3xl font-light mb-8 sm:mb-12 tracking-tight">
           {t('home.recent')}
         </h2>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
+        <div className="max-w-5xl mx-auto">
           {currentPosts.map((post, index) => (
             <BlogCard key={post.slug} post={post} index={index} />
           ))}

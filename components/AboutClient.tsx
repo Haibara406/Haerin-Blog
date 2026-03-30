@@ -27,6 +27,18 @@ export default function AboutClient({ stats }: { stats: Stats }) {
       skills: ['Kafka', 'RocketMQ', 'RabbitMQ']
     },
     {
+      title: 'Middleware',
+      skills: ['Nacos', 'Seata', 'Sentinel', 'ShardingSphere']
+    },
+    {
+      title: 'Search & Analytics',
+      skills: ['ElasticSearch', 'Logstash', 'Kibana']
+    },
+    {
+      title: 'Monitoring',
+      skills: ['Prometheus', 'Grafana']
+    },
+    {
       title: 'DevOps',
       skills: ['Docker']
     }
@@ -182,30 +194,48 @@ export default function AboutClient({ stats }: { stats: Stats }) {
         </div>
 
         {/* Blog Stats */}
-        <div className="mt-20 grid grid-cols-2 sm:grid-cols-4 gap-6 max-w-4xl mx-auto">
-          <div className="text-center p-8 rounded-2xl bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800/50 dark:to-gray-900/50
-                        border border-gray-200 dark:border-gray-800 hover:scale-[1.02] transition-transform duration-300">
-            <div className="text-4xl font-light mb-3 bg-gradient-to-br from-gray-900 to-gray-600 dark:from-gray-100 dark:to-gray-400
-                          bg-clip-text text-transparent">{stats.totalPosts}</div>
-            <div className="text-sm text-gray-600 dark:text-gray-400 font-medium">{t('about.stats.articles')}</div>
-          </div>
-          <div className="text-center p-8 rounded-2xl bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800/50 dark:to-gray-900/50
-                        border border-gray-200 dark:border-gray-800 hover:scale-[1.02] transition-transform duration-300">
-            <div className="text-4xl font-light mb-3 bg-gradient-to-br from-gray-900 to-gray-600 dark:from-gray-100 dark:to-gray-400
-                          bg-clip-text text-transparent">{Math.round(stats.totalWords / 1000)}k</div>
-            <div className="text-sm text-gray-600 dark:text-gray-400 font-medium">{t('about.stats.words')}</div>
-          </div>
-          <div className="text-center p-8 rounded-2xl bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800/50 dark:to-gray-900/50
-                        border border-gray-200 dark:border-gray-800 hover:scale-[1.02] transition-transform duration-300">
-            <div className="text-4xl font-light mb-3 bg-gradient-to-br from-gray-900 to-gray-600 dark:from-gray-100 dark:to-gray-400
-                          bg-clip-text text-transparent">{stats.totalTags}</div>
-            <div className="text-sm text-gray-600 dark:text-gray-400 font-medium">{t('about.stats.tags')}</div>
-          </div>
-          <div className="text-center p-8 rounded-2xl bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800/50 dark:to-gray-900/50
-                        border border-gray-200 dark:border-gray-800 hover:scale-[1.02] transition-transform duration-300">
-            <div className="text-4xl font-light mb-3 bg-gradient-to-br from-gray-900 to-gray-600 dark:from-gray-100 dark:to-gray-400
-                          bg-clip-text text-transparent">{stats.totalCategories}</div>
-            <div className="text-sm text-gray-600 dark:text-gray-400 font-medium">{t('about.stats.categories')}</div>
+        <div className="mt-20 max-w-5xl mx-auto">
+          <div className="flex flex-wrap justify-center gap-x-16 gap-y-8">
+            <div className="text-center group">
+              <div className="text-6xl font-light mb-2 group-hover:scale-110 transition-transform duration-300">
+                {stats.totalPosts}
+              </div>
+              <div className="text-sm text-gray-500 dark:text-gray-500 uppercase tracking-widest">
+                {t('about.stats.articles')}
+              </div>
+            </div>
+            <div className="text-center group">
+              <div className="text-6xl font-light mb-2 group-hover:scale-110 transition-transform duration-300">
+                {Math.round(stats.totalWords / 1000)}k
+              </div>
+              <div className="text-sm text-gray-500 dark:text-gray-500 uppercase tracking-widest">
+                {t('about.stats.words')}
+              </div>
+            </div>
+            <div className="text-center group">
+              <div className="text-6xl font-light mb-2 group-hover:scale-110 transition-transform duration-300">
+                {stats.totalTags}
+              </div>
+              <div className="text-sm text-gray-500 dark:text-gray-500 uppercase tracking-widest">
+                {t('about.stats.tags')}
+              </div>
+            </div>
+            <div className="text-center group">
+              <div className="text-6xl font-light mb-2 group-hover:scale-110 transition-transform duration-300">
+                {stats.totalCategories}
+              </div>
+              <div className="text-sm text-gray-500 dark:text-gray-500 uppercase tracking-widest">
+                {t('about.stats.categories')}
+              </div>
+            </div>
+            <div className="text-center group">
+              <div className="text-6xl font-light mb-2 group-hover:scale-110 transition-transform duration-300">
+                -
+              </div>
+              <div className="text-sm text-gray-500 dark:text-gray-500 uppercase tracking-widest">
+                Visitors
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -216,34 +246,32 @@ export default function AboutClient({ stats }: { stats: Stats }) {
                      bg-clip-text text-transparent">
           Skills
         </h2>
-        <div className="max-w-4xl mx-auto space-y-12">
+        <div className="max-w-4xl mx-auto space-y-8">
           {skillCategories.map((category, categoryIndex) => (
             <div
               key={category.title}
-              className="animate-slide-up"
+              className="animate-slide-up border-b border-gray-200 dark:border-gray-800 pb-8"
               style={{ animationDelay: `${500 + categoryIndex * 100}ms` }}
             >
-              <div className="flex flex-col sm:flex-row gap-6 items-start">
-                <div className="sm:w-48 flex-shrink-0">
-                  <h3 className="text-xl font-medium text-gray-900 dark:text-gray-100 mb-2">
-                    {category.title}
-                  </h3>
-                  <div className="w-16 h-0.5 bg-gradient-to-r from-gray-900 to-transparent dark:from-gray-100"></div>
-                </div>
-                <div className="flex-1 flex flex-wrap gap-3">
-                  {category.skills.map((skill, skillIndex) => (
-                    <span
-                      key={skill}
-                      className="px-5 py-2.5 bg-gray-100 dark:bg-gray-800 rounded-full text-sm font-medium
-                               hover:bg-gray-200 dark:hover:bg-gray-700 transition-all duration-300
-                               hover:scale-105 animate-scale-in cursor-default
-                               border border-gray-200 dark:border-gray-700"
-                      style={{ animationDelay: `${600 + categoryIndex * 100 + skillIndex * 50}ms` }}
-                    >
-                      {skill}
-                    </span>
-                  ))}
-                </div>
+              <h3 className="text-sm uppercase tracking-widest text-gray-500 dark:text-gray-500 mb-4">
+                {category.title}
+              </h3>
+              <div className="flex flex-wrap gap-x-6 gap-y-2">
+                {category.skills.map((skill, skillIndex) => (
+                  <span
+                    key={skill}
+                    className="text-2xl font-light text-gray-700 dark:text-gray-300
+                             hover:text-gray-900 dark:hover:text-gray-100
+                             transition-colors duration-300 cursor-default
+                             animate-fade-in"
+                    style={{ animationDelay: `${600 + categoryIndex * 100 + skillIndex * 50}ms` }}
+                  >
+                    {skill}
+                    {skillIndex < category.skills.length - 1 && (
+                      <span className="text-gray-300 dark:text-gray-700 ml-6">·</span>
+                    )}
+                  </span>
+                ))}
               </div>
             </div>
           ))}
