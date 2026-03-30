@@ -63,33 +63,54 @@ export default function TagsClient({ tags }: { tags: Tag[] }) {
         ))}
       </div>
 
-      <section className="max-w-3xl mx-auto">
-        <h2 className="font-serif text-3xl font-light mb-8 tracking-tight">
+      <section className="max-w-5xl mx-auto">
+        <h2 className="font-serif text-3xl font-light mb-12 tracking-tight text-center">
           {t('tags.all')}
         </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div className="space-y-0">
           {tags.map((tag, index) => (
             <Link
               key={tag.tag}
               href={`/tags/${encodeURIComponent(tag.tag)}`}
-              className="animate-slide-up group"
-              style={{ animationDelay: `${index * 50}ms` }}
+              className="animate-slide-up group block"
+              style={{ animationDelay: `${index * 30}ms` }}
             >
-              <div className="flex items-center justify-between p-4 rounded-lg border border-gray-200 dark:border-gray-800
-                           hover:border-gray-300 dark:hover:border-gray-700
-                           hover:shadow-md transition-all duration-300 hover:-translate-y-1">
-                <div className="flex items-center gap-3">
-                  <span className="text-2xl text-gray-400 dark:text-gray-600">#</span>
-                  <span className="text-lg group-hover:text-gray-900 dark:group-hover:text-gray-100 transition-colors">
-                    {tag.tag}
+              <div className="flex items-center justify-between py-6 px-8
+                           border-b border-gray-200 dark:border-gray-800
+                           hover:bg-gray-50 dark:hover:bg-gray-900/30
+                           transition-all duration-300 relative overflow-hidden">
+                {/* Index */}
+                <div className="flex items-center gap-8 flex-1">
+                  <span className="text-4xl font-light text-gray-200 dark:text-gray-800
+                                 group-hover:text-gray-300 dark:group-hover:text-gray-700
+                                 transition-colors duration-300 select-none w-16">
+                    {String(index + 1).padStart(2, '0')}
                   </span>
+
+                  {/* Tag name */}
+                  <div className="flex items-center gap-3 flex-1">
+                    <span className="text-2xl text-gray-400 dark:text-gray-600
+                                   group-hover:text-gray-500 dark:group-hover:text-gray-500
+                                   transition-colors duration-300">#</span>
+                    <span className="text-2xl font-light group-hover:translate-x-2
+                                   transition-transform duration-300">
+                      {tag.tag}
+                    </span>
+                  </div>
                 </div>
-                <div className="flex items-center gap-2">
-                  <span className="text-sm text-gray-500 dark:text-gray-400">
-                    {tag.count} {t('tags.articles')}
-                  </span>
+
+                {/* Count */}
+                <div className="flex items-center gap-6">
+                  <div className="text-right">
+                    <div className="text-3xl font-light">{tag.count}</div>
+                    <div className="text-xs text-gray-500 dark:text-gray-500 uppercase tracking-wider">
+                      {t('tags.articles')}
+                    </div>
+                  </div>
+
                   <svg
-                    className="w-5 h-5 text-gray-400 group-hover:translate-x-1 transition-transform"
+                    className="w-5 h-5 text-gray-400 opacity-0 group-hover:opacity-100
+                             group-hover:translate-x-1 transition-all duration-300"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -102,6 +123,11 @@ export default function TagsClient({ tags }: { tags: Tag[] }) {
                     />
                   </svg>
                 </div>
+
+                {/* Hover indicator */}
+                <div className="absolute left-0 top-0 w-1 h-full bg-gray-900 dark:bg-gray-100
+                              scale-y-0 group-hover:scale-y-100 transition-transform duration-300
+                              origin-top"></div>
               </div>
             </Link>
           ))}

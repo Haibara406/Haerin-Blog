@@ -230,53 +230,62 @@ export default function AboutClient({ stats }: { stats: Stats }) {
                      bg-clip-text text-transparent">
           {t('about.projects.title')}
         </h2>
-        <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-8">
+        <div className="max-w-4xl mx-auto space-y-1">
           {projects.map((project, index) => (
             <a
               key={project.name}
               href={project.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="group block p-8 rounded-2xl border border-gray-200 dark:border-gray-800
-                       hover:border-gray-300 dark:hover:border-gray-700
-                       hover:shadow-2xl transition-all duration-500 hover:-translate-y-2
-                       bg-gradient-to-br from-white to-gray-50 dark:from-gray-900 dark:to-gray-800/50
-                       animate-slide-up overflow-hidden relative"
+              className="group block relative overflow-hidden
+                       animate-slide-up"
               style={{ animationDelay: `${700 + index * 150}ms` }}
             >
-              {/* Decorative gradient */}
-              <div className="absolute inset-0 bg-gradient-to-br from-gray-100/0 via-gray-100/50 to-gray-200/0
-                            dark:from-gray-800/0 dark:via-gray-700/30 dark:to-gray-800/0
-                            opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-
-              <div className="relative z-10">
-                <div className="flex items-start justify-between mb-4">
-                  <h3 className="text-2xl font-semibold group-hover:text-gray-900 dark:group-hover:text-gray-100
-                               transition-colors duration-300">
-                    {project.name}
-                  </h3>
-                  <ExternalLink className="w-5 h-5 text-gray-400 group-hover:text-gray-900 dark:group-hover:text-gray-100
-                                         group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300" />
+              <div className="flex items-center gap-8 py-8 px-6
+                            border-b border-gray-200 dark:border-gray-800
+                            hover:bg-gray-50 dark:hover:bg-gray-900/30
+                            transition-all duration-500">
+                {/* Index Number */}
+                <div className="text-6xl font-light text-gray-200 dark:text-gray-800
+                              group-hover:text-gray-300 dark:group-hover:text-gray-700
+                              transition-colors duration-500 select-none">
+                  {String(index + 1).padStart(2, '0')}
                 </div>
 
-                <p className="text-gray-600 dark:text-gray-400 mb-6 leading-relaxed">
-                  {project.desc[language]}
-                </p>
+                {/* Content */}
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-baseline gap-4 mb-3">
+                    <h3 className="text-3xl font-light group-hover:translate-x-2 transition-transform duration-500">
+                      {project.name}
+                    </h3>
+                    <ExternalLink className="w-4 h-4 text-gray-400 opacity-0 group-hover:opacity-100
+                                           group-hover:translate-x-1 group-hover:-translate-y-1
+                                           transition-all duration-500" />
+                  </div>
 
-                <div className="flex flex-wrap gap-2">
-                  {project.tech.map((tech) => (
-                    <span
-                      key={tech}
-                      className="px-3 py-1 text-xs font-medium rounded-full
-                               bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300
-                               border border-gray-200 dark:border-gray-700
-                               group-hover:border-gray-300 dark:group-hover:border-gray-600
-                               transition-colors duration-300"
-                    >
-                      {tech}
-                    </span>
-                  ))}
+                  <p className="text-gray-600 dark:text-gray-400 mb-4 leading-relaxed">
+                    {project.desc[language]}
+                  </p>
+
+                  <div className="flex flex-wrap gap-2">
+                    {project.tech.map((tech, techIndex) => (
+                      <span
+                        key={tech}
+                        className="text-xs font-medium text-gray-500 dark:text-gray-500
+                                 opacity-0 group-hover:opacity-100 transition-all duration-500"
+                        style={{ transitionDelay: `${techIndex * 50}ms` }}
+                      >
+                        {tech}
+                        {techIndex < project.tech.length - 1 && <span className="ml-2">·</span>}
+                      </span>
+                    ))}
+                  </div>
                 </div>
+
+                {/* Hover indicator */}
+                <div className="absolute left-0 top-0 w-1 h-full bg-gray-900 dark:bg-gray-100
+                              scale-y-0 group-hover:scale-y-100 transition-transform duration-500
+                              origin-top"></div>
               </div>
             </a>
           ))}

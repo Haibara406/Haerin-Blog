@@ -6,13 +6,7 @@ export default function Friends() {
   const { t } = useLanguage()
 
   const friends = [
-    {
-      name: 'Example Friend',
-      url: 'https://example.com',
-      avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=1',
-      desc: '一个很棒的博客',
-    },
-    // 用户可以在这里添加更多友链
+    // 用户可以在这里添加友链
   ]
 
   return (
