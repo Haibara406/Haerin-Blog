@@ -17,6 +17,16 @@ export default function ArchiveClient({ archive }: { archive: Record<string, Omi
   const { t } = useLanguage()
   const years = Object.keys(archive).sort((a, b) => parseInt(b) - parseInt(a))
   const [selectedYear, setSelectedYear] = useState<string | null>(years[0] || null)
+  const [isAnimating, setIsAnimating] = useState(false)
+
+  const handleYearClick = (year: string) => {
+    if (year === selectedYear || isAnimating) return
+    setIsAnimating(true)
+    setSelectedYear(year)
+    setTimeout(() => setIsAnimating(false), 500)
+  }
+
+  const selectedIndex = selectedYear ? years.indexOf(selectedYear) : 0
 
   return (
     <div className="max-w-6xl mx-auto px-6 py-20">
@@ -35,17 +45,26 @@ export default function ArchiveClient({ archive }: { archive: Record<string, Omi
           {/* Line */}
           <div className="absolute left-0 right-0 h-0.5 bg-gray-300 dark:bg-gray-700 top-1/2 -translate-y-1/2"></div>
 
+          {/* Active Indicator - moves along the line */}
+          <div
+            className="absolute top-1/2 -translate-y-1/2 w-4 h-4 rounded-full bg-gray-900 dark:bg-gray-100 z-20 pointer-events-none transition-all duration-500 ease-in-out"
+            style={{
+              left: `calc(${selectedIndex * 100 / (years.length - 1)}% - 0.5rem)`,
+              transform: `translateY(-50%) scale(${isAnimating ? 1 : 1.5})`,
+            }}
+          ></div>
+
           {/* Year Dots */}
           {years.map((year, index) => (
             <button
               key={year}
-              onClick={() => setSelectedYear(year)}
+              onClick={() => handleYearClick(year)}
               className="relative z-10 group animate-scale-in"
               style={{ animationDelay: `${index * 100}ms` }}
             >
               <div className={`w-4 h-4 rounded-full transition-all duration-500 ${
                 selectedYear === year
-                  ? 'bg-gray-900 dark:bg-gray-100 scale-150'
+                  ? 'bg-transparent'
                   : 'bg-gray-400 dark:bg-gray-600 group-hover:bg-gray-600 dark:group-hover:bg-gray-400 group-hover:scale-125'
               }`}></div>
               <div className={`absolute top-10 left-1/2 -translate-x-1/2 whitespace-nowrap transition-all duration-300 ${
