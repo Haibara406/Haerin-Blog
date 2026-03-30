@@ -2,10 +2,29 @@
 
 import { useLanguage } from '@/components/LanguageProvider'
 
+interface Friend {
+  name: string
+  url: string
+  avatar: string
+  desc: string
+}
+
 export default function Friends() {
   const { t } = useLanguage()
 
-  const friends = [
+  const friends: Friend[] = [
+    {
+      name: 'Personal Blog',
+      url: 'https://sherry.haikari.top/',
+      avatar: '/avatar.png',
+      desc: '基于 Java 和 Vue 的个人博客系统 / Personal blog system built with Java and Vue',
+    },
+    {
+      name: 'ByteFerry',
+      url: 'https://byteferry.haikari.top/#quick',
+      avatar: '/avatar.png',
+      desc: '基于 Java 和 Redis 的跨平台剪贴板同步工具 / Cross-platform clipboard sync tool',
+    },
     // 用户可以在这里添加友链
   ]
 
