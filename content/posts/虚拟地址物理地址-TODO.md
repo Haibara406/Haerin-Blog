@@ -1,7 +1,7 @@
 ---
 title: 虚拟地址物理地址
 date: '2026-03-04'
-excerpt: '**物理地址**是内存条上真实存在的地址，CPU 通过它直接访问内存芯片上的某个位置，硬件层面定死在那了。'
+excerpt: 讲解虚拟地址与物理地址的区别、MMU地址转换流程，以及分页与分段两种内存管理方式。
 tags:
   - Operating System
 category: Operating System

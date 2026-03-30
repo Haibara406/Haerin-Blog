@@ -1,7 +1,7 @@
 ---
 title: redis的数据结构
 date: '2026-03-10'
-excerpt: 简介
+excerpt: 系统介绍Redis五种核心数据类型的特性、底层数据结构及常用操作命令。
 tags:
   - Redis
 category: Database

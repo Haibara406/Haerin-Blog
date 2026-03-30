@@ -1,7 +1,7 @@
 ---
 title: TCP
 date: '2026-03-09'
-excerpt: TCP
+excerpt: 全面讲解TCP协议的特性、三次握手四次挥手、粘包拆包、流量控制与拥塞控制等核心知识。
 tags:
   - Network
   - TCP

@@ -1,7 +1,7 @@
 ---
 title: Mysql窗口函数
 date: '2026-02-17'
-excerpt: 首先窗口函数都需要使用over()，表示在什么规则下执行窗口函数
+excerpt: 介绍MySQL窗口函数的用法，包括row_number、rank、dense_rank等排名函数及TopN查询技巧。
 tags:
   - MySQL
 category: Database

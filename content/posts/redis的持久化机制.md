@@ -1,7 +1,7 @@
 ---
 title: redis的持久化机制
 date: '2026-02-11'
-excerpt: Redis的持久化机制
+excerpt: 介绍Redis的RDB快照与AOF日志两种持久化机制的原理、优缺点及bgsave的写时复制实现。
 tags:
   - Redis
 category: Database

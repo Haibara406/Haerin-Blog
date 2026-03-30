@@ -1,7 +1,7 @@
 ---
 title: BigInteger如何存储字节数组
 date: '2025-12-17'
-excerpt: "\U0001F4CB 目录"
+excerpt: 深入解析BigInteger如何通过符号位和字节数组存储大整数，并追踪其底层源码实现。
 tags:
   - Java
 category: Backend

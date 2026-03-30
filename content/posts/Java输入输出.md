@@ -1,7 +1,7 @@
 ---
 title: Java输入输出
 date: '2026-02-26'
-excerpt: 只有输出
+excerpt: 整理Java算法竞赛中常见的输入输出模板，涵盖单组、多组、数组等多种输入形式。
 tags:
   - Java
 category: Backend

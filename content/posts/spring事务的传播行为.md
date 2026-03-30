@@ -1,7 +1,7 @@
 ---
 title: spring事务的传播行为
 date: '2026-02-03'
-excerpt: Spring事务的传播行为
+excerpt: 介绍Spring七种事务传播行为的含义、使用场景及代码示例，帮助理解事务嵌套的处理逻辑。
 tags:
   - Java
   - Spring

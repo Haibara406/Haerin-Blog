@@ -1,7 +1,7 @@
 ---
 title: JVM
 date: '2026-02-08'
-excerpt: JVM
+excerpt: 全面介绍JVM的组成结构，重点讲解类加载器的加载、验证、准备、解析、初始化五个阶段。
 tags:
   - Java
   - JVM

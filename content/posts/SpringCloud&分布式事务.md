@@ -1,7 +1,7 @@
 ---
 title: SpringCloud&分布式事务
 date: '2026-03-05'
-excerpt: 分布式和微服务的区别
+excerpt: 对比分布式与微服务的区别，介绍单体、SOA、微服务架构的演进及SpringCloud的核心组件。
 tags:
   - Java
   - SpringCloud

@@ -1,7 +1,7 @@
 ---
 title: blog_interceptor_vs_aop
 date: '2025-10-27'
-excerpt: "\U0001F6E1️ Spring Boot限流架构设计：拦截器vs AOP的技术选型深度解析"
+excerpt: 深度对比Spring Boot中拦截器与AOP在限流场景下的技术选型，分析执行时机与架构差异。
 tags:
   - Java
 category: Backend

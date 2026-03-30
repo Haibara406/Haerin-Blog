@@ -1,7 +1,7 @@
 ---
 title: Git使用说明
 date: '2025-10-27'
-excerpt: Git 使用说明
+excerpt: Git版本控制系统的全面使用指南，涵盖基础操作、分支管理、远程仓库及企业级工作流。
 tags:
   - Git
 category: Backend

@@ -1,7 +1,7 @@
 ---
 title: redis pipeline
 date: '2026-01-14'
-excerpt: Pipeline
+excerpt: 讲解Redis Pipeline的原理与使用场景，并与事务、Lua脚本在原子性和性能上进行对比。
 tags:
   - Redis
 category: Database

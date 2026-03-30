@@ -1,7 +1,7 @@
 ---
 title: mysql的主从同步机制
 date: '2026-03-06'
-excerpt: Mysql的主从同步机制
+excerpt: 介绍MySQL主从同步的核心流程、异步/同步/半同步三种复制类型及并行复制的优化方案。
 tags:
   - InnoDB
   - MySQL

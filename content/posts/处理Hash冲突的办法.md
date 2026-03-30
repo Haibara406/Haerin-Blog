@@ -1,7 +1,7 @@
 ---
 title: 处理Hash冲突的办法
 date: '2025-12-27'
-excerpt: Hash冲突是什么
+excerpt: 介绍Hash冲突的成因及拉链法、开放寻址法、再哈希法三种解决方案的原理与优缺点。
 tags:
   - Java
   - Hash

@@ -1,7 +1,7 @@
 ---
 title: strategy-factory-pattern-export-blog
 date: '2025-10-27'
-excerpt: 从零开始：用策略模式+工厂模式重构导出功能的思考与实践
+excerpt: 通过导出功能的重构实践，讲解策略模式与工厂模式组合使用的设计思路与代码实现。
 tags:
   - Java
   - Design Patterns

@@ -1,7 +1,7 @@
 ---
 title: websocket
 date: '2026-03-01'
-excerpt: Websocket
+excerpt: 介绍WebSocket协议的握手流程、帧格式、与HTTP轮询的对比，以及心跳保活机制。
 tags:
   - Websocket
   - Network

@@ -1,7 +1,7 @@
 ---
 title: Java泛型
 date: '2026-03-06'
-excerpt: 什么是Java中的泛型
+excerpt: 讲解Java泛型的作用、伪泛型本质、类型擦除机制及其带来的限制与使用注意事项。
 tags:
   - Java
 category: Backend

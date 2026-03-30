@@ -1,7 +1,7 @@
 ---
 title: mybatis
 date: '2026-02-04'
-excerpt: Mybatis简介
+excerpt: 介绍MyBatis的核心思想与工作原理，并与Hibernate进行全面对比，分析各自的适用场景。
 tags:
   - Java
   - ORM

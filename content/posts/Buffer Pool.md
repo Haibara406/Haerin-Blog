@@ -1,7 +1,7 @@
 ---
 title: Buffer Pool
 date: '2025-10-27'
-excerpt: "> \U0001F4D6 深入理解 MySQL InnoDB 存储引擎的核心组件 - Buffer Pool 的实现原理与优化机制"
+excerpt: 详解MySQL InnoDB的Buffer Pool原理，包括Free链表、Flush链表、LRU冷热分离等核心机制。
 tags:
   - MySQL
   - InnoDB

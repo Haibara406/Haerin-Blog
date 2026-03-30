@@ -1,7 +1,7 @@
 ---
 title: Mysql锁
 date: '2026-02-27'
-excerpt: Mysql InnoDB的锁可以从两个维度来分，分别是粒度和模式
+excerpt: 系统梳理MySQL InnoDB的锁体系，包括行锁、表锁、意向锁、MDL锁及间隙锁的原理与应用。
 tags:
   - MySQL
 category: Database

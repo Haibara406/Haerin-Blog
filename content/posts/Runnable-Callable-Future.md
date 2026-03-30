@@ -1,7 +1,7 @@
 ---
 title: Runnable-Callable-Future
 date: '2026-03-02'
-excerpt: Runnable-Callable-Future
+excerpt: 对比Runnable、Callable、Future三者的区别，并详解FutureTask的状态机与cancel/get方法实现。
 tags:
   - Java
   - Thread
