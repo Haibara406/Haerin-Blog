@@ -72,6 +72,9 @@ const translations = {
     'search.empty': 'No articles found',
     'search.results': 'results',
     'search.close': 'Press ESC to close',
+    'common.close': 'Close',
+    'common.prev': 'Previous',
+    'common.next': 'Next',
     'footer.rights': 'All rights reserved.',
   },
   zh: {
@@ -131,6 +134,9 @@ const translations = {
     'search.empty': '没有找到相关文章',
     'search.results': '个结果',
     'search.close': '按 ESC 关闭',
+    'common.close': '关闭',
+    'common.prev': '上一页',
+    'common.next': '下一页',
     'footer.rights': '版权所有。',
   },
 }

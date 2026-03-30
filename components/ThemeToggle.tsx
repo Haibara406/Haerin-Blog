@@ -5,10 +5,10 @@ import { useTheme } from './ThemeProvider'
 export default function ThemeToggle() {
   const { theme, actualTheme, setTheme } = useTheme()
 
-  const cycleTheme = () => {
-    if (theme === 'light') setTheme('dark')
-    else if (theme === 'dark') setTheme('system')
-    else setTheme('light')
+  const cycleTheme = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (theme === 'light') setTheme('dark', e)
+    else if (theme === 'dark') setTheme('system', e)
+    else setTheme('light', e)
   }
 
   return (
