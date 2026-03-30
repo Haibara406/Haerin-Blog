@@ -25,6 +25,24 @@ export default function Friends() {
       avatar: '/avatar.png',
       desc: '基于 Java 和 Redis 的跨平台剪贴板同步工具 / Cross-platform clipboard sync tool',
     },
+    {
+      name: 'CDU-SNZH MiniApp',
+      url: 'https://github.com/Haibara406/cdu-snzh-miniapp',
+      avatar: '/avatar.png',
+      desc: '蜀南竹海景区数字化服务后端系统 / Digital service backend for Shunan Bamboo Sea scenic area',
+    },
+    {
+      name: 'Damai Pro',
+      url: 'https://github.com/Haibara406/damai-pro',
+      avatar: '/avatar.png',
+      desc: '高并发购票系统解决方案 / High-concurrency ticketing system solutions',
+    },
+    {
+      name: 'Damai AI',
+      url: 'https://github.com/Haibara406/damai-ai',
+      avatar: '/avatar.png',
+      desc: 'AI 智能购票服务平台 / AI intelligent ticketing service platform',
+    },
     // 用户可以在这里添加友链
   ]
 

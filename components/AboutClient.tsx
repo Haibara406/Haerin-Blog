@@ -51,6 +51,33 @@ export default function AboutClient({ stats }: { stats: Stats }) {
       },
       tech: ['Java', 'MySQL', 'Redis']
     },
+    {
+      name: 'CDU-SNZH MiniApp',
+      url: 'https://github.com/Haibara406/cdu-snzh-miniapp',
+      desc: {
+        zh: '面向蜀南竹海景区的数字化服务后端系统，为微信小程序提供完整的景区管理和游客服务功能',
+        en: 'Digital service backend system for Shunan Bamboo Sea scenic area, providing complete scenic area management and tourist service functions for WeChat mini-programs'
+      },
+      tech: ['Java', 'MySQL', 'Redis', 'MiniApp', 'Docker', 'Dify', 'Qwen', 'RabbitMQ', 'Minio', 'MybatisPlus']
+    },
+    {
+      name: 'Damai Pro',
+      url: 'https://github.com/Haibara406/damai-pro',
+      desc: {
+        zh: '应对高并发产生的各种问题，设计了各种实际落地的解决方案，如：分库分表、锁的优化、缓存三大问题以及高流量下的订单生成、消息丢失如何处理等等问题',
+        en: 'Designed practical solutions for high-concurrency challenges including database sharding, lock optimization, cache issues, order generation under high traffic, and message loss handling'
+      },
+      tech: ['Java', 'MySQL', 'Redis', 'Kafka', 'Docker', 'SpringCloud', 'Nacos', 'MybatisPlus', 'ElasticSearch', 'LogStash', 'Kibana', 'ShardingSphere', 'Prometheus', 'Grafana']
+    },
+    {
+      name: 'Damai AI',
+      url: 'https://github.com/Haibara406/damai-ai',
+      desc: {
+        zh: '为购票系统设计开发的 AI 智能服务平台，包含购票咨询、运维分析、知识问答三大功能模块。购票咨询和知识问答提供给用户，让用户只需对话便可了解规则、查看节目详情、下单等操作。运维分析提供给内部人员，让 AI 赋能故障排查的场景',
+        en: 'AI intelligent service platform designed for ticketing systems, featuring three major modules: ticket consultation, operations analysis, and knowledge Q&A. Consultation and Q&A enable users to understand rules, view event details, and place orders through conversation. Operations analysis empowers internal staff with AI-driven troubleshooting'
+      },
+      tech: ['Java', 'SpringAI', 'Elasticsearch', 'Prometheus', 'MCP Protocol', 'QWen', 'DeepSeek']
+    },
   ]
 
   return (
@@ -299,50 +326,55 @@ export default function AboutClient({ stats }: { stats: Stats }) {
                      bg-clip-text text-transparent">
           {t('about.contact.title')}
         </h2>
-        <div className="space-y-8">
-          <div className="flex items-start gap-6 p-6 rounded-2xl bg-gray-50 dark:bg-gray-800/50
-                        border border-gray-200 dark:border-gray-800 hover:border-gray-300 dark:hover:border-gray-700
-                        transition-all duration-300">
-            <svg className="w-6 h-6 mt-1 text-gray-600 dark:text-gray-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-            </svg>
-            <div className="flex-1">
-              <div className="font-medium mb-3 text-gray-900 dark:text-gray-100">{t('about.contact.email')}</div>
-              <div className="flex flex-wrap gap-4">
-                <a href="mailto:haibaraiii@foxmail.com" className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 transition-colors">
-                  haibaraiii@foxmail.com
-                </a>
-                <span className="text-gray-300 dark:text-gray-700">/</span>
-                <a href="mailto:haibara406@gmail.com" className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 transition-colors">
-                  haibara406@gmail.com
-                </a>
+
+        <div className="grid md:grid-cols-2 gap-8">
+          {/* Email */}
+          <div className="space-y-4">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-12 h-12 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center">
+                <svg className="w-5 h-5 text-gray-600 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
               </div>
+              <h3 className="text-xl font-medium">{t('about.contact.email')}</h3>
             </div>
+            <a href="mailto:haibaraiii@foxmail.com"
+               className="block text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100
+                        transition-colors duration-300 hover:translate-x-1 transform">
+              haibaraiii@foxmail.com
+            </a>
+            <a href="mailto:haibara406@gmail.com"
+               className="block text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100
+                        transition-colors duration-300 hover:translate-x-1 transform">
+              haibara406@gmail.com
+            </a>
           </div>
 
-          <div className="flex items-start gap-6 p-6 rounded-2xl bg-gray-50 dark:bg-gray-800/50
-                        border border-gray-200 dark:border-gray-800 hover:border-gray-300 dark:hover:border-gray-700
-                        transition-all duration-300">
-            <svg className="w-6 h-6 mt-1 text-gray-600 dark:text-gray-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
-            </svg>
-            <div className="flex-1">
-              <div className="font-medium mb-3 text-gray-900 dark:text-gray-100">Social Links</div>
-              <div className="flex flex-wrap gap-4">
-                <a href="https://github.com/Haibara406" target="_blank" rel="noopener noreferrer"
-                   className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 transition-colors">
-                  GitHub
-                </a>
-                <a href="https://gitee.com/haibaraiii" target="_blank" rel="noopener noreferrer"
-                   className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 transition-colors">
-                  Gitee
-                </a>
-                <a href="https://blog.csdn.net/2302_80908396" target="_blank" rel="noopener noreferrer"
-                   className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 transition-colors">
-                  CSDN
-                </a>
+          {/* Social Links */}
+          <div className="space-y-4">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-12 h-12 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center">
+                <svg className="w-5 h-5 text-gray-600 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+                </svg>
               </div>
+              <h3 className="text-xl font-medium">Social Links</h3>
             </div>
+            <a href="https://github.com/Haibara406" target="_blank" rel="noopener noreferrer"
+               className="block text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100
+                        transition-colors duration-300 hover:translate-x-1 transform">
+              GitHub
+            </a>
+            <a href="https://gitee.com/haibaraiii" target="_blank" rel="noopener noreferrer"
+               className="block text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100
+                        transition-colors duration-300 hover:translate-x-1 transform">
+              Gitee
+            </a>
+            <a href="https://blog.csdn.net/2302_80908396" target="_blank" rel="noopener noreferrer"
+               className="block text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100
+                        transition-colors duration-300 hover:translate-x-1 transform">
+              CSDN
+            </a>
           </div>
         </div>
       </section>

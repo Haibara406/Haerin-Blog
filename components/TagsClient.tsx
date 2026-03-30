@@ -63,53 +63,41 @@ export default function TagsClient({ tags }: { tags: Tag[] }) {
         ))}
       </div>
 
-      <section className="max-w-5xl mx-auto">
+      <section className="max-w-6xl mx-auto">
         <h2 className="font-serif text-3xl font-light mb-12 tracking-tight text-center">
           {t('tags.all')}
         </h2>
-        <div className="space-y-0">
+        <div className="grid md:grid-cols-2 gap-x-8">
           {tags.map((tag, index) => (
             <Link
               key={tag.tag}
               href={`/tags/${encodeURIComponent(tag.tag)}`}
               className="animate-slide-up group block"
-              style={{ animationDelay: `${index * 30}ms` }}
+              style={{ animationDelay: `${index * 20}ms` }}
             >
-              <div className="flex items-center justify-between py-6 px-8
+              <div className="flex items-center justify-between py-5 px-6
                            border-b border-gray-200 dark:border-gray-800
                            hover:bg-gray-50 dark:hover:bg-gray-900/30
                            transition-all duration-300 relative overflow-hidden">
-                {/* Index */}
-                <div className="flex items-center gap-8 flex-1">
-                  <span className="text-4xl font-light text-gray-200 dark:text-gray-800
-                                 group-hover:text-gray-300 dark:group-hover:text-gray-700
-                                 transition-colors duration-300 select-none w-16">
-                    {String(index + 1).padStart(2, '0')}
+                {/* Tag name */}
+                <div className="flex items-center gap-3 flex-1 min-w-0">
+                  <span className="text-xl text-gray-400 dark:text-gray-600
+                                 group-hover:text-gray-500 dark:group-hover:text-gray-500
+                                 transition-colors duration-300 flex-shrink-0">#</span>
+                  <span className="text-lg font-light group-hover:translate-x-1
+                                 transition-transform duration-300 truncate">
+                    {tag.tag}
                   </span>
-
-                  {/* Tag name */}
-                  <div className="flex items-center gap-3 flex-1">
-                    <span className="text-2xl text-gray-400 dark:text-gray-600
-                                   group-hover:text-gray-500 dark:group-hover:text-gray-500
-                                   transition-colors duration-300">#</span>
-                    <span className="text-2xl font-light group-hover:translate-x-2
-                                   transition-transform duration-300">
-                      {tag.tag}
-                    </span>
-                  </div>
                 </div>
 
                 {/* Count */}
-                <div className="flex items-center gap-6">
+                <div className="flex items-center gap-3 flex-shrink-0">
                   <div className="text-right">
-                    <div className="text-3xl font-light">{tag.count}</div>
-                    <div className="text-xs text-gray-500 dark:text-gray-500 uppercase tracking-wider">
-                      {t('tags.articles')}
-                    </div>
+                    <span className="text-2xl font-light">{tag.count}</span>
                   </div>
 
                   <svg
-                    className="w-5 h-5 text-gray-400 opacity-0 group-hover:opacity-100
+                    className="w-4 h-4 text-gray-400 opacity-0 group-hover:opacity-100
                              group-hover:translate-x-1 transition-all duration-300"
                     fill="none"
                     stroke="currentColor"
@@ -125,7 +113,7 @@ export default function TagsClient({ tags }: { tags: Tag[] }) {
                 </div>
 
                 {/* Hover indicator */}
-                <div className="absolute left-0 top-0 w-1 h-full bg-gray-900 dark:bg-gray-100
+                <div className="absolute left-0 top-0 w-0.5 h-full bg-gray-900 dark:bg-gray-100
                               scale-y-0 group-hover:scale-y-100 transition-transform duration-300
                               origin-top"></div>
               </div>
