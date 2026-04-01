@@ -21,6 +21,21 @@ const translations = {
     'nav.tags': 'Tags',
     'nav.friends': 'Friends',
     'nav.about': 'About',
+    'mimo.page.kicker': '',
+    'mimo.page.title': 'Notes',
+    'mimo.page.subtitle': '',
+    'mimo.front.title': 'HELLO, I\'M HAIBARA',
+    'mimo.front.altTitle': '你好，我是 Haibara',
+    'mimo.front.label': 'ABOUT ME',
+    'mimo.back.title': '',
+    'mimo.back.p1': '',
+    'mimo.back.p2': '',
+    'mimo.back.pullText': 'A millennium past, I beheld a Nascent Soul cultivator\'s personal realm and was filled with envy. I vowed to grow stronger, forsaking worldly attachments to embark upon the path of immortal cultivation. Though but a rogue cultivator, I persevered through countless tribulations—a century refining Qi, four centuries establishing Foundation, a millennium forming the Golden Core, two millennia breaking through to Nascent Soul. After another millennium, I encountered a bottleneck and entered death seclusion. Today, four thousand years hence, I have finally achieved Spirit Severing. Looking back upon the vicissitudes, the gulf between immortal and mortal defies words—such is the mortal realm.',
+    'mimo.back.pullHint': 'DRAG THE TAIL',
+    'mimo.back.toggle': 'Click Here To Flip Back',
+    'home.mimo.title': 'HELLO, I\'M HAIBARA',
+    'home.mimo.altTitle': '你好，我是 Haibara',
+    'home.mimo.label': 'ABOUT ME',
     'home.hero.title': 'Thoughts on design,\ncode, and craft',
     'home.hero.subtitle': 'A collection of essays exploring the intersection of technology and creativity.',
     'home.recent': 'Recent Writing',
@@ -86,6 +101,21 @@ const translations = {
     'nav.tags': '标签',
     'nav.friends': '友链',
     'nav.about': '关于',
+    'mimo.page.kicker': '',
+    'mimo.page.title': '随笔',
+    'mimo.page.subtitle': '',
+    'mimo.front.title': '你好，我是 Haibara',
+    'mimo.front.altTitle': 'HELLO, I\'M HAIBARA',
+    'mimo.front.label': '关于我',
+    'mimo.back.title': '',
+    'mimo.back.p1': '',
+    'mimo.back.p2': '',
+    'mimo.back.pullText': '千年以前，看见元婴强者自己的小世界，非常羡慕，于是心中立誓，我也要变强，后抛弃世间情爱，终踏上修仙一途，虽一介散修，但亦往，经历千磨万难，炼气百年，四百年筑基，一千年结丹，两千年突破元婴，又一千年后遭遇瓶颈，决心闭门死关，四千年后的今日，终于突破化神，感叹回首沧桑，道不尽仙凡殊途，尽人间。',
+    'mimo.back.pullHint': '从这里拖动',
+    'mimo.back.toggle': '点击这里翻回正面',
+    'home.mimo.title': '你好，我是 Haibara',
+    'home.mimo.altTitle': 'HELLO, I\'M HAIBARA',
+    'home.mimo.label': '关于我',
     'home.hero.title': '关于设计、\n代码与创造的思考',
     'home.hero.subtitle': '探索技术与创意交汇的文章集。',
     'home.recent': '最近文章',
@@ -149,10 +179,8 @@ const translations = {
 
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
   const [language, setLanguageState] = useState<Language>('en')
-  const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
-    setMounted(true)
     const savedLang = (localStorage.getItem('language') as Language) || 'en'
     setLanguageState(savedLang)
   }, [])
@@ -164,10 +192,6 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
 
   const t = (key: string): string => {
     return translations[language][key as keyof typeof translations.en] || key
-  }
-
-  if (!mounted) {
-    return <>{children}</>
   }
 
   return (
