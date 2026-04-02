@@ -8,7 +8,16 @@ import * as THREE from 'three'
 import { createNoise3D } from 'simplex-noise'
 import { useLanguage } from './LanguageProvider'
 
-type PlanetType = 'Earth' | 'Saturn' | 'Neptune'
+type PlanetType =
+  | 'Sun'
+  | 'Mercury'
+  | 'Venus'
+  | 'Earth'
+  | 'Mars'
+  | 'Jupiter'
+  | 'Saturn'
+  | 'Uranus'
+  | 'Neptune'
 
 type PlanetVoxel = {
   position: [number, number, number]
@@ -25,10 +34,33 @@ type PlanetInstance = {
   targetScale: number
 }
 
-const PLANETS: PlanetType[] = ['Earth', 'Saturn', 'Neptune']
+type PlanetMaterialOptions = {
+  emissive?: string
+  emissiveIntensity?: number
+  metalness: number
+  roughness: number
+}
+
+const PLANETS: PlanetType[] = [
+  'Sun',
+  'Mercury',
+  'Venus',
+  'Earth',
+  'Mars',
+  'Jupiter',
+  'Saturn',
+  'Uranus',
+  'Neptune',
+]
 const PLANET_SEEDS: Record<PlanetType, number> = {
+  Sun: 11,
+  Mercury: 22,
+  Venus: 33,
   Earth: 101,
+  Mars: 404,
+  Jupiter: 505,
   Saturn: 202,
+  Uranus: 707,
   Neptune: 303,
 }
 const MAX_INSTANCES = 25000
@@ -171,6 +203,81 @@ function generatePlanet(type: PlanetType, isMobile: boolean, earthData: ImageDat
           }
         }
 
+        if (type === 'Sun') {
+          const radius = isMobile ? 12 : 16
+
+          if (distance <= radius) {
+            isSolid = true
+
+            if (distance > radius - 1) {
+              const flare = noise3D(x * 0.14, y * 0.14, z * 0.14)
+              const granulation = noise3D(x * 0.3, y * 0.3, z * 0.3)
+
+              if (granulation > 0.62) {
+                color.set('#fff6b0')
+              } else if (flare > 0.34) {
+                color.set('#ffc14d')
+              } else if (flare > -0.1) {
+                color.set('#ff9726')
+              } else {
+                color.set('#ff6a00')
+              }
+            } else if (distance > radius * 0.72) {
+              color.set('#ff7d12')
+            } else if (distance > radius * 0.48) {
+              color.set('#ff5a00')
+            } else {
+              color.set('#db3200')
+            }
+          }
+        }
+
+        if (type === 'Mercury') {
+          const radius = isMobile ? 7 : 9
+
+          if (distance <= radius) {
+            isSolid = true
+
+            if (distance > radius - 1) {
+              const craterA = noise3D(x * 0.24, y * 0.24, z * 0.24)
+              const craterB = noise3D(x * 0.58, y * 0.58, z * 0.58)
+
+              if (craterB > 0.68) {
+                color.set('#7a7670')
+              } else if (craterA > 0.35) {
+                color.set('#b2aba1')
+              } else {
+                color.set('#918a80')
+              }
+            } else {
+              color.set('#5a544d')
+            }
+          }
+        }
+
+        if (type === 'Venus') {
+          const radius = isMobile ? 9 : 11
+
+          if (distance <= radius) {
+            isSolid = true
+
+            if (distance > radius - 1) {
+              const cloudBand = Math.sin(y * 0.9 + noise3D(x * 0.08, y * 0.08, z * 0.08))
+              const haze = noise3D(x * 0.18, y * 0.18, z * 0.18)
+
+              if (haze > 0.48) {
+                color.set('#f3ddb0')
+              } else if (cloudBand > 0.45) {
+                color.set('#d8b57b')
+              } else {
+                color.set('#b98a52')
+              }
+            } else {
+              color.set('#83562f')
+            }
+          }
+        }
+
         if (type === 'Neptune') {
           const radius = isMobile ? 10 : 13
 
@@ -245,6 +352,88 @@ function generatePlanet(type: PlanetType, isMobile: boolean, earthData: ImageDat
           }
         }
 
+        if (type === 'Mars') {
+          const radius = isMobile ? 8 : 10
+
+          if (distance <= radius) {
+            isSolid = true
+
+            if (distance > radius - 1) {
+              const terrainNoise = noise3D(x * 0.16, y * 0.16, z * 0.16)
+              const craterNoise = noise3D(x * 0.42, y * 0.42, z * 0.42)
+              const dustNoise = noise3D(x * 0.08, y * 0.08, z * 0.08)
+
+              if (craterNoise > 0.66) {
+                color.set('#7c341d')
+              } else if (terrainNoise > 0.34) {
+                color.set('#cf6940')
+              } else if (dustNoise > 0.18) {
+                color.set('#b64b2b')
+              } else {
+                color.set('#96301d')
+              }
+            } else {
+              color.set('#5a1a12')
+            }
+          }
+        }
+
+        if (type === 'Jupiter') {
+          const radius = isMobile ? 13 : 17
+
+          if (distance <= radius) {
+            isSolid = true
+
+            if (distance > radius - 1) {
+              const band = Math.sin(y * 0.6 + noise3D(x * 0.05, y * 0.05, z * 0.05))
+              const spotDistance = Math.sqrt(
+                Math.pow(x - radius * 0.6, 2) +
+                  Math.pow(y + radius * 0.3, 2) +
+                  Math.pow(z - radius * 0.6, 2)
+              )
+
+              if (spotDistance < radius * 0.25) {
+                color.set('#ce5a2b')
+              } else if (band > 0.7) {
+                color.set('#dfd0af')
+              } else if (band > 0.3) {
+                color.set('#b87a47')
+              } else if (band > -0.2) {
+                color.set('#cd9654')
+              } else if (band > -0.6) {
+                color.set('#efe1c8')
+              } else {
+                color.set('#8d5734')
+              }
+            } else {
+              color.set('#5c3a21')
+            }
+          }
+        }
+
+        if (type === 'Uranus') {
+          const radius = isMobile ? 10 : 13
+
+          if (distance <= radius) {
+            isSolid = true
+
+            if (distance > radius - 1) {
+              const band = Math.sin(y * 0.7 + noise3D(x * 0.06, y * 0.06, z * 0.06))
+              const mist = noise3D(x * 0.14, y * 0.14, z * 0.14)
+
+              if (mist > 0.52) {
+                color.set('#e5fff8')
+              } else if (band > 0.3) {
+                color.set('#a7e7de')
+              } else {
+                color.set('#78c9c6')
+              }
+            } else {
+              color.set('#4f9c9a')
+            }
+          }
+        }
+
         if (isSolid) {
           voxels.push({
             position: [x, y, z],
@@ -258,6 +447,31 @@ function generatePlanet(type: PlanetType, isMobile: boolean, earthData: ImageDat
   const result = shuffleInPlace(voxels, random).slice(0, MAX_INSTANCES)
   planetCache[cacheKey] = result
   return result
+}
+
+function getPlanetMaterialOptions(type: PlanetType): PlanetMaterialOptions {
+  if (type === 'Sun') {
+    return {
+      emissive: '#ff7a1a',
+      emissiveIntensity: 0.85,
+      metalness: 0.02,
+      roughness: 0.5,
+    }
+  }
+
+  if (type === 'Mars') {
+    return {
+      emissive: '#2d0803',
+      emissiveIntensity: 0.05,
+      metalness: 0.04,
+      roughness: 0.82,
+    }
+  }
+
+  return {
+    metalness: 0.08,
+    roughness: 0.72,
+  }
 }
 
 function VoxelPlanet({ type, isMobile }: { type: PlanetType; isMobile: boolean }) {
@@ -278,6 +492,7 @@ function VoxelPlanet({ type, isMobile }: { type: PlanetType; isMobile: boolean }
     }),
     []
   )
+  const materialOptions = useMemo(() => getPlanetMaterialOptions(type), [type])
 
   useEffect(() => {
     if (type !== 'Earth' || earthData) {
@@ -385,7 +600,12 @@ function VoxelPlanet({ type, isMobile }: { type: PlanetType; isMobile: boolean }
   return (
     <instancedMesh ref={meshRef} args={[undefined, undefined, MAX_INSTANCES]} castShadow receiveShadow>
       <boxGeometry args={[1, 1, 1]} />
-      <meshStandardMaterial roughness={0.72} metalness={0.08} />
+      <meshStandardMaterial
+        roughness={materialOptions.roughness}
+        metalness={materialOptions.metalness}
+        emissive={materialOptions.emissive}
+        emissiveIntensity={materialOptions.emissiveIntensity}
+      />
     </instancedMesh>
   )
 }
@@ -521,7 +741,7 @@ export default function CosmosExperience() {
 
             <div className="mt-14 grid max-w-3xl grid-cols-1 gap-4 sm:grid-cols-3">
               <div className="rounded-[28px] border border-white/10 bg-black/18 px-5 py-5 backdrop-blur-md">
-                <div className="text-3xl font-serif font-light">3</div>
+                <div className="text-3xl font-serif font-light">{PLANETS.length}</div>
                 <div className="mt-3 text-xs font-semibold uppercase tracking-[0.18em] text-slate-300">
                   {t('cosmos.stat.planets')}
                 </div>
