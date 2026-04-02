@@ -53,6 +53,7 @@ export default function Navigation() {
     { href: '/archive', label: t('nav.archive') },
     { href: '/tags', label: t('nav.tags') },
     { href: '/friends', label: t('nav.friends') },
+    { href: '/cosmos', label: t('nav.cosmos') },
     { href: '/about', label: t('nav.about') },
   ]
 
