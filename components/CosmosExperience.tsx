@@ -27,12 +27,17 @@ type PlanetVoxel = {
 type PlanetInstance = {
   position: THREE.Vector3
   morphPosition: THREE.Vector3
+  basePosition: THREE.Vector3
+  chargePosition: THREE.Vector3
+  explodedPosition: THREE.Vector3
   targetPosition: THREE.Vector3
   color: THREE.Color
   targetColor: THREE.Color
   scale: number
   targetScale: number
 }
+
+type ExplosionPhase = 'restored' | 'charging' | 'exploded'
 
 type PlanetMaterialOptions = {
   emissive?: string
@@ -75,6 +80,9 @@ function createBlankInstance(): PlanetInstance {
   return {
     position: new THREE.Vector3(),
     morphPosition: new THREE.Vector3(),
+    basePosition: new THREE.Vector3(),
+    chargePosition: new THREE.Vector3(),
+    explodedPosition: new THREE.Vector3(),
     targetPosition: new THREE.Vector3(),
     color: new THREE.Color('#000000'),
     targetColor: new THREE.Color('#000000'),
@@ -474,7 +482,58 @@ function getPlanetMaterialOptions(type: PlanetType): PlanetMaterialOptions {
   }
 }
 
-function VoxelPlanet({ type, isMobile }: { type: PlanetType; isMobile: boolean }) {
+function getExplodedPosition(
+  type: PlanetType,
+  source: [number, number, number],
+  index: number,
+  isMobile: boolean
+) {
+  const base = new THREE.Vector3(...source)
+  const radius = Math.max(base.length(), 1)
+  const outward = base.clone().normalize()
+  const random = mulberry32(PLANET_SEEDS[type] + index * 17 + (isMobile ? 3 : 11))
+  const tangent = new THREE.Vector3(
+    random() * 2 - 1,
+    random() * 2 - 1,
+    random() * 2 - 1
+  ).normalize()
+  const radiusFactor = THREE.MathUtils.clamp(radius / (isMobile ? 12 : 16), 0.3, 1.2)
+  const spread = (isMobile ? 10 : 16) + radiusFactor * (isMobile ? 12 : 20)
+  const wobble = (random() * 2 - 1) * (isMobile ? 2.2 : 3.4)
+
+  return base
+    .clone()
+    .add(outward.multiplyScalar(spread))
+    .add(tangent.multiplyScalar(wobble))
+}
+
+function getChargePosition(
+  type: PlanetType,
+  source: [number, number, number],
+  index: number,
+  isMobile: boolean
+) {
+  const base = new THREE.Vector3(...source)
+  const inward = base.clone().multiplyScalar(isMobile ? 0.82 : 0.8)
+  const random = mulberry32(PLANET_SEEDS[type] + index * 29 + (isMobile ? 5 : 13))
+  const jitter = new THREE.Vector3(
+    random() * 2 - 1,
+    random() * 2 - 1,
+    random() * 2 - 1
+  ).multiplyScalar(isMobile ? 0.35 : 0.55)
+
+  return inward.add(jitter)
+}
+
+function VoxelPlanet({
+  type,
+  isMobile,
+  explosionPhase,
+}: {
+  type: PlanetType
+  isMobile: boolean
+  explosionPhase: ExplosionPhase
+}) {
   const meshRef = useRef<THREE.InstancedMesh>(null)
   const instancesRef = useRef<PlanetInstance[]>([])
   const [earthData, setEarthData] = useState<ImageData | null>(globalEarthData)
@@ -528,9 +587,22 @@ function VoxelPlanet({ type, isMobile }: { type: PlanetType; isMobile: boolean }
         return
       }
 
-      instance.targetPosition.set(...voxel.position)
+      instance.basePosition.set(...voxel.position)
+      instance.chargePosition.copy(getChargePosition(type, voxel.position, index, isMobile))
+      instance.explodedPosition.copy(getExplodedPosition(type, voxel.position, index, isMobile))
+
+      if (explosionPhase === 'charging') {
+        instance.targetPosition.copy(instance.chargePosition)
+        instance.targetScale = 0.88
+      } else if (explosionPhase === 'exploded') {
+        instance.targetPosition.copy(instance.explodedPosition)
+        instance.targetScale = 1
+      } else {
+        instance.targetPosition.copy(instance.basePosition)
+        instance.targetScale = 1
+      }
+
       instance.targetColor.copy(voxel.color)
-      instance.targetScale = 1
 
       if (instance.scale === 0 && instance.position.lengthSq() === 0) {
         instance.position.set(...voxel.position)
@@ -538,7 +610,7 @@ function VoxelPlanet({ type, isMobile }: { type: PlanetType; isMobile: boolean }
         instance.color.copy(voxel.color)
       }
     })
-  }, [type, isMobile, earthData])
+  }, [type, isMobile, earthData, explosionPhase])
 
   useFrame((state, delta) => {
     if (!meshRef.current || instancesRef.current.length === 0) {
@@ -553,9 +625,13 @@ function VoxelPlanet({ type, isMobile }: { type: PlanetType; isMobile: boolean }
     localRay.copy(raycaster.ray).applyMatrix4(inverseMatrix)
 
     const repelRadius = isMobile ? 5 : 8
+    const morphLerp = explosionPhase === 'charging' ? 9 : explosionPhase === 'exploded' ? 7.5 : 2.8
+    const positionLerp =
+      explosionPhase === 'charging' ? 18 : explosionPhase === 'exploded' ? 24 : 15
+    const scaleLerp = explosionPhase === 'exploded' ? 18 : 12
 
     instancesRef.current.forEach((instance, index) => {
-      instance.morphPosition.lerp(instance.targetPosition, delta * 2.5)
+      instance.morphPosition.lerp(instance.targetPosition, delta * morphLerp)
       instance.color.lerp(instance.targetColor, delta * 2.5)
 
       let desiredScale = instance.targetScale
@@ -577,8 +653,8 @@ function VoxelPlanet({ type, isMobile }: { type: PlanetType; isMobile: boolean }
         }
       }
 
-      instance.scale = THREE.MathUtils.lerp(instance.scale, desiredScale, delta * 12)
-      instance.position.lerp(targetPosition, delta * 15)
+      instance.scale = THREE.MathUtils.lerp(instance.scale, desiredScale, delta * scaleLerp)
+      instance.position.lerp(targetPosition, delta * positionLerp)
 
       dummy.position.copy(instance.position)
       dummy.scale.setScalar(instance.scale)
@@ -631,7 +707,13 @@ function CameraRig() {
   return null
 }
 
-function PlanetContainer({ activePlanet }: { activePlanet: PlanetType }) {
+function PlanetContainer({
+  activePlanet,
+  explosionPhase,
+}: {
+  activePlanet: PlanetType
+  explosionPhase: ExplosionPhase
+}) {
   const { size, viewport } = useThree()
   const isMobile = size.width < 768
   const groupRef = useRef<THREE.Group>(null)
@@ -674,13 +756,19 @@ function PlanetContainer({ activePlanet }: { activePlanet: PlanetType }) {
           <sphereGeometry args={[isMobile ? 18 : 24, 32, 32]} />
           <meshBasicMaterial transparent opacity={0} depthWrite={false} />
         </mesh>
-        <VoxelPlanet type={activePlanet} isMobile={isMobile} />
+        <VoxelPlanet type={activePlanet} isMobile={isMobile} explosionPhase={explosionPhase} />
       </PresentationControls>
     </group>
   )
 }
 
-function CosmosScene({ activePlanet }: { activePlanet: PlanetType }) {
+function CosmosScene({
+  activePlanet,
+  explosionPhase,
+}: {
+  activePlanet: PlanetType
+  explosionPhase: ExplosionPhase
+}) {
   return (
     <Canvas
       className="h-full w-full"
@@ -698,7 +786,7 @@ function CosmosScene({ activePlanet }: { activePlanet: PlanetType }) {
       />
       <directionalLight position={[-10, -10, -10]} intensity={0.32} color="#7a8aa2" />
 
-      <PlanetContainer activePlanet={activePlanet} />
+      <PlanetContainer activePlanet={activePlanet} explosionPhase={explosionPhase} />
       <Stars radius={58} depth={50} count={3000} factor={4} saturation={0} fade speed={1} />
       <CameraRig />
 
@@ -712,13 +800,23 @@ function CosmosScene({ activePlanet }: { activePlanet: PlanetType }) {
 export default function CosmosExperience() {
   const { t } = useLanguage()
   const [activePlanet, setActivePlanet] = useState<PlanetType>('Earth')
+  const [explosionPhase, setExplosionPhase] = useState<ExplosionPhase>('restored')
+  const explodeTimerRef = useRef<number | null>(null)
+
+  useEffect(() => {
+    return () => {
+      if (explodeTimerRef.current !== null) {
+        window.clearTimeout(explodeTimerRef.current)
+      }
+    }
+  }, [])
 
   return (
     <section className="relative isolate min-h-screen overflow-hidden bg-[#05070d] text-white">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(74,90,116,0.72),_transparent_48%),linear-gradient(180deg,_#9AA5B3_0%,_#354150_34%,_#111722_68%,_#05070d_100%)]" />
       <div className="absolute inset-0 opacity-50 [background-image:linear-gradient(rgba(255,255,255,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.04)_1px,transparent_1px)] [background-size:72px_72px]" />
       <div className="absolute inset-0">
-        <CosmosScene activePlanet={activePlanet} />
+        <CosmosScene activePlanet={activePlanet} explosionPhase={explosionPhase} />
       </div>
 
       <div className="pointer-events-none relative z-10 flex min-h-screen flex-col px-6 pb-10 pt-28 md:px-12 md:pb-12 md:pt-32 lg:px-20">
@@ -758,6 +856,48 @@ export default function CosmosExperience() {
                   {t('cosmos.stat.realtime')}
                 </div>
               </div>
+            </div>
+
+            <div className="mt-8 pointer-events-auto">
+              <button
+                type="button"
+                onClick={() => {
+                  if (explosionPhase === 'charging') {
+                    return
+                  }
+
+                  if (explosionPhase === 'exploded') {
+                    setExplosionPhase('restored')
+                    return
+                  }
+
+                  setExplosionPhase('charging')
+                  if (explodeTimerRef.current !== null) {
+                    window.clearTimeout(explodeTimerRef.current)
+                  }
+
+                  explodeTimerRef.current = window.setTimeout(() => {
+                    setExplosionPhase((current) =>
+                      current === 'charging' ? 'exploded' : current
+                    )
+                    explodeTimerRef.current = null
+                  }, 180)
+                }}
+                aria-pressed={explosionPhase !== 'restored'}
+                className={`inline-flex items-center rounded-full border px-5 py-2.5 text-sm font-medium transition-all duration-300 ${
+                  explosionPhase === 'exploded'
+                    ? 'border-[#f2c67a] bg-[#f2c67a] text-slate-950 shadow-[0_10px_40px_rgba(242,198,122,0.18)]'
+                    : explosionPhase === 'charging'
+                      ? 'border-[#f2c67a]/70 bg-[#f2c67a]/15 text-[#f6ddb0]'
+                      : 'border-white/15 bg-black/20 text-slate-100 hover:border-white/30 hover:bg-black/28'
+                }`}
+              >
+                {explosionPhase === 'charging'
+                  ? t('cosmos.charging')
+                  : explosionPhase === 'exploded'
+                    ? t('cosmos.restore')
+                    : t('cosmos.explode')}
+              </button>
             </div>
           </div>
         </div>
