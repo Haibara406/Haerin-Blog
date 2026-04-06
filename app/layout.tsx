@@ -4,6 +4,7 @@ import Navigation from '@/components/Navigation'
 import Footer from '@/components/Footer'
 import { ThemeProvider } from '@/components/ThemeProvider'
 import { LanguageProvider } from '@/components/LanguageProvider'
+import { PageTransitionProvider } from '@/components/PageTransitionProvider'
 
 export const metadata: Metadata = {
   title: {
@@ -67,11 +68,13 @@ export default function RootLayout({
       <body>
         <ThemeProvider>
           <LanguageProvider>
-            <Navigation />
-            <main className="min-h-screen">
-              {children}
-            </main>
-            <Footer />
+            <PageTransitionProvider>
+              <Navigation />
+              <main className="min-h-screen">
+                {children}
+              </main>
+              <Footer />
+            </PageTransitionProvider>
           </LanguageProvider>
         </ThemeProvider>
       </body>

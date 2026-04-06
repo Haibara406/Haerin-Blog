@@ -1,12 +1,12 @@
 'use client'
 
-import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { useLanguage } from './LanguageProvider'
+import { usePageTransition } from './PageTransitionProvider'
 
 export default function BackButton() {
-  const router = useRouter()
   const { t } = useLanguage()
+  const { goBack, navigate } = usePageTransition()
   const [canGoBack, setCanGoBack] = useState(false)
 
   useEffect(() => {
@@ -18,9 +18,9 @@ export default function BackButton() {
     // 如果有历史记录且不是从外部链接进来的，则返回上一页
     // 否则返回首页
     if (canGoBack && document.referrer && document.referrer.includes(window.location.host)) {
-      router.back()
+      goBack()
     } else {
-      router.push('/')
+      navigate({ href: '/' })
     }
   }
 

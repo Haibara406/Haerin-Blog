@@ -119,9 +119,7 @@ function ensureEarthDataLoaded() {
   earthTextureRequested = true
 
   const image = new window.Image()
-  image.crossOrigin = 'anonymous'
-  image.src =
-    'https://cdn.jsdelivr.net/gh/mrdoob/three.js@master/examples/textures/planets/earth_atmos_2048.jpg'
+  image.src = '/earth-atmos-2048.jpg'
 
   image.onload = () => {
     const canvas = document.createElement('canvas')
@@ -169,10 +167,6 @@ function generatePlanet(type: PlanetType, isMobile: boolean, earthData: ImageDat
 
         if (type === 'Earth') {
           const radius = isMobile ? 10 : 13
-          if (!earthData) {
-            continue
-          }
-
           if (distance > radius + 2 || distance === 0) {
             continue
           }
@@ -187,15 +181,59 @@ function generatePlanet(type: PlanetType, isMobile: boolean, earthData: ImageDat
           const v = 0.5 - latitude / Math.PI
           u = (u + 0.25) % 1
 
-          const pixelX = Math.floor(u * (earthData.width - 1))
-          const pixelY = Math.floor(v * (earthData.height - 1))
-          const pixelIndex = (pixelY * earthData.width + pixelX) * 4
+          let red = 0
+          let green = 0
+          let blue = 0
+          let isOcean = false
 
-          const red = earthData.data[pixelIndex] / 255
-          const green = earthData.data[pixelIndex + 1] / 255
-          const blue = earthData.data[pixelIndex + 2] / 255
+          if (earthData) {
+            const pixelX = Math.floor(u * (earthData.width - 1))
+            const pixelY = Math.floor(v * (earthData.height - 1))
+            const pixelIndex = (pixelY * earthData.width + pixelX) * 4
 
-          const isOcean = blue > red * 1.2 && blue > green * 1.1 && red < 0.8
+            red = earthData.data[pixelIndex] / 255
+            green = earthData.data[pixelIndex + 1] / 255
+            blue = earthData.data[pixelIndex + 2] / 255
+            isOcean = blue > red * 1.2 && blue > green * 1.1 && red < 0.8
+          } else {
+            const continentNoise =
+              noise3D(nx * 1.8 + 12, ny * 1.8 - 4, nz * 1.8 + 8) * 0.8 +
+              noise3D(nx * 4.2 - 7, ny * 4.2 + 9, nz * 4.2 - 3) * 0.35 -
+              Math.abs(ny) * 0.18
+            const cloudNoise = noise3D(nx * 7.5 + 14, ny * 7.5 - 12, nz * 7.5 + 6)
+            const polarCap = Math.max(0, (Math.abs(ny) - 0.72) / 0.28)
+
+            isOcean = continentNoise < 0.06
+
+            if (polarCap > 0.55) {
+              red = 0.93
+              green = 0.97
+              blue = 1
+            } else if (isOcean) {
+              red = 0.08
+              green = 0.28 + Math.max(continentNoise, -0.3) * 0.08
+              blue = 0.58 + Math.max(cloudNoise, -0.2) * 0.12
+            } else if (continentNoise > 0.42) {
+              red = 0.7
+              green = 0.72
+              blue = 0.68
+            } else if (continentNoise > 0.22) {
+              red = 0.42
+              green = 0.62
+              blue = 0.26
+            } else {
+              red = 0.62
+              green = 0.56
+              blue = 0.3
+            }
+
+            if (cloudNoise > 0.62) {
+              red = Math.min(red + 0.22, 1)
+              green = Math.min(green + 0.22, 1)
+              blue = Math.min(blue + 0.22, 1)
+            }
+          }
+
           const elevation = isOcean ? radius : radius + 1
 
           if (distance <= elevation) {
@@ -593,6 +631,7 @@ function VoxelPlanet({
 }) {
   const meshRef = useRef<THREE.InstancedMesh>(null)
   const instancesRef = useRef<PlanetInstance[]>([])
+  const activeCountRef = useRef(0)
   const [earthData, setEarthData] = useState<ImageData | null>(globalEarthData)
   const raycaster = useThree((state) => state.raycaster)
 
@@ -634,6 +673,11 @@ function VoxelPlanet({
     }
 
     const voxels = generatePlanet(type, isMobile, earthData)
+    activeCountRef.current = voxels.length
+
+    if (meshRef.current) {
+      meshRef.current.count = voxels.length
+    }
 
     instancesRef.current.forEach((instance, index) => {
       const voxel = voxels[index]
@@ -670,12 +714,13 @@ function VoxelPlanet({
   }, [type, isMobile, earthData, explosionPhase])
 
   useFrame((state, delta) => {
-    if (!meshRef.current || instancesRef.current.length === 0) {
+    if (!meshRef.current || instancesRef.current.length === 0 || activeCountRef.current === 0) {
       return
     }
 
     const { dummy, targetPosition, direction, swirl, closestPoint, inverseMatrix, localRay } =
       motionState
+    const activeCount = activeCountRef.current
 
     raycaster.setFromCamera(state.pointer, state.camera)
     inverseMatrix.copy(meshRef.current.matrixWorld).invert()
@@ -686,7 +731,8 @@ function VoxelPlanet({
     const positionLerp = explosionPhase === 'charging' ? 18 : explosionPhase === 'exploded' ? 24 : 15
     const scaleLerp = explosionPhase === 'charging' ? 14 : explosionPhase === 'exploded' ? 18 : 12
 
-    instancesRef.current.forEach((instance, index) => {
+    for (let index = 0; index < activeCount; index += 1) {
+      const instance = instancesRef.current[index]
       instance.morphPosition.lerp(instance.targetPosition, delta * morphLerp)
       instance.color.lerp(instance.targetColor, delta * 2.5)
 
@@ -718,7 +764,7 @@ function VoxelPlanet({
 
       meshRef.current!.setMatrixAt(index, dummy.matrix)
       meshRef.current!.setColorAt(index, instance.color)
-    })
+    }
 
     meshRef.current.instanceMatrix.needsUpdate = true
     if (meshRef.current.instanceColor) {
@@ -730,7 +776,13 @@ function VoxelPlanet({
   })
 
   return (
-    <instancedMesh ref={meshRef} args={[undefined, undefined, MAX_INSTANCES]} castShadow receiveShadow>
+    <instancedMesh
+      ref={meshRef}
+      args={[undefined, undefined, MAX_INSTANCES]}
+      castShadow
+      receiveShadow
+      frustumCulled={false}
+    >
       <boxGeometry args={[1, 1, 1]} />
       <meshStandardMaterial
         roughness={materialOptions.roughness}
@@ -770,6 +822,7 @@ function VoxelCore({
       meshRef.current!.setColorAt(index, voxel.color)
     })
 
+    meshRef.current.count = coreVoxels.length
     meshRef.current.instanceMatrix.needsUpdate = true
     if (meshRef.current.instanceColor) {
       meshRef.current.instanceColor.needsUpdate = true
@@ -794,7 +847,11 @@ function VoxelCore({
 
   return (
     <group ref={groupRef} scale={0.001}>
-      <instancedMesh ref={meshRef} args={[undefined, undefined, MAX_CORE_INSTANCES]}>
+      <instancedMesh
+        ref={meshRef}
+        args={[undefined, undefined, MAX_CORE_INSTANCES]}
+        frustumCulled={false}
+      >
         <boxGeometry args={[0.9, 0.9, 0.9]} />
         <meshStandardMaterial
           roughness={0.45}
@@ -838,6 +895,8 @@ function PlanetContainer({
   const { size, viewport } = useThree()
   const isMobile = size.width < 768
   const groupRef = useRef<THREE.Group>(null)
+  const transitionGroupRef = useRef<THREE.Group>(null)
+  const switchProgressRef = useRef(1)
 
   const targetPosition = useMemo(
     () => new THREE.Vector3(isMobile ? 0 : viewport.width * 0.22, 0, 0),
@@ -850,36 +909,89 @@ function PlanetContainer({
 
   useEffect(() => {
     ensureEarthDataLoaded()
-    PLANETS.forEach((planet) => {
+
+    let cancelled = false
+    let warmupIndex = 0
+    let timeoutId: number | null = null
+
+    const warmNextPlanet = () => {
+      if (cancelled || warmupIndex >= PLANETS.length) {
+        return
+      }
+
+      const planet = PLANETS[warmupIndex]
       generatePlanet(planet, isMobile, planet === 'Earth' ? globalEarthData : null)
-    })
+      warmupIndex += 1
+      timeoutId = window.setTimeout(warmNextPlanet, 16)
+    }
+
+    warmNextPlanet()
+
+    return () => {
+      cancelled = true
+      if (timeoutId !== null) {
+        window.clearTimeout(timeoutId)
+      }
+    }
   }, [isMobile])
+
+  useEffect(() => {
+    switchProgressRef.current = 0
+  }, [activePlanet])
 
   useFrame((_, delta) => {
     if (!groupRef.current) {
       return
     }
 
+    const nextProgress = Math.min(1, switchProgressRef.current + delta * 3.2)
+    switchProgressRef.current = nextProgress
+    const eased = 1 - Math.pow(1 - nextProgress, 3)
+    const entryScale = 0.82 + eased * 0.18
+    const entryLift = (1 - eased) * (isMobile ? -1.8 : -2.4)
+    const entryRotationY = (1 - eased) * 0.7
+    const entryRotationX = (1 - eased) * -0.18
+
     groupRef.current.position.lerp(targetPosition, delta * 5)
     groupRef.current.scale.lerp(targetScale, delta * 5)
+
+    if (transitionGroupRef.current) {
+      transitionGroupRef.current.position.y = entryLift
+      transitionGroupRef.current.scale.setScalar(entryScale)
+      transitionGroupRef.current.rotation.y = entryRotationY
+      transitionGroupRef.current.rotation.x = entryRotationX
+    }
   })
 
   return (
     <group ref={groupRef}>
-      <PresentationControls
-        global
-        cursor
-        rotation={[0, 0, 0]}
-        polar={[-Math.PI / 2, Math.PI / 2]}
-        azimuth={[-Infinity, Infinity]}
-      >
-        <mesh>
-          <sphereGeometry args={[isMobile ? 18 : 24, 32, 32]} />
-          <meshBasicMaterial transparent opacity={0} depthWrite={false} />
-        </mesh>
-        <VoxelCore type={activePlanet} isMobile={isMobile} explosionPhase={explosionPhase} />
-        <VoxelPlanet type={activePlanet} isMobile={isMobile} explosionPhase={explosionPhase} />
-      </PresentationControls>
+      <group ref={transitionGroupRef}>
+        <PresentationControls
+          key={activePlanet}
+          global
+          cursor
+          rotation={[0, 0, 0]}
+          polar={[-Math.PI / 2, Math.PI / 2]}
+          azimuth={[-Infinity, Infinity]}
+        >
+          <mesh>
+            <sphereGeometry args={[isMobile ? 18 : 24, 32, 32]} />
+            <meshBasicMaterial transparent opacity={0} depthWrite={false} />
+          </mesh>
+          <VoxelCore
+            key={`${activePlanet}-core`}
+            type={activePlanet}
+            isMobile={isMobile}
+            explosionPhase={explosionPhase}
+          />
+          <VoxelPlanet
+            key={`${activePlanet}-planet`}
+            type={activePlanet}
+            isMobile={isMobile}
+            explosionPhase={explosionPhase}
+          />
+        </PresentationControls>
+      </group>
     </group>
   )
 }
@@ -959,28 +1071,7 @@ export default function CosmosExperience() {
               <p>{t('cosmos.subtitle')}</p>
             </div>
 
-            <div className="mt-14 grid max-w-3xl grid-cols-1 gap-4 sm:grid-cols-3">
-              <div className="rounded-[28px] border border-white/10 bg-black/18 px-5 py-5 backdrop-blur-md">
-                <div className="text-3xl font-serif font-light">{PLANETS.length}</div>
-                <div className="mt-3 text-xs font-semibold uppercase tracking-[0.18em] text-slate-300">
-                  {t('cosmos.stat.planets')}
-                </div>
-              </div>
-              <div className="rounded-[28px] border border-white/10 bg-black/18 px-5 py-5 backdrop-blur-md">
-                <div className="text-3xl font-serif font-light">25K</div>
-                <div className="mt-3 text-xs font-semibold uppercase tracking-[0.18em] text-slate-300">
-                  {t('cosmos.stat.voxels')}
-                </div>
-              </div>
-              <div className="rounded-[28px] border border-white/10 bg-black/18 px-5 py-5 backdrop-blur-md">
-                <div className="text-3xl font-serif font-light">60fps</div>
-                <div className="mt-3 text-xs font-semibold uppercase tracking-[0.18em] text-slate-300">
-                  {t('cosmos.stat.realtime')}
-                </div>
-              </div>
-            </div>
-
-            <div className="mt-8 pointer-events-auto">
+            <div className="mt-10 pointer-events-auto">
               <button
                 type="button"
                 onClick={() => {

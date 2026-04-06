@@ -1,7 +1,7 @@
 'use client'
 
-import Link from 'next/link'
 import { useEffect, useRef, useState } from 'react'
+import Link from '@/components/TransitionLink'
 
 interface Post {
   slug: string

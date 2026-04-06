@@ -1,8 +1,8 @@
 'use client'
 
-import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
+import Link from '@/components/TransitionLink'
 import ThemeToggle from './ThemeToggle'
 import LanguageToggle from './LanguageToggle'
 import SearchModal from './SearchModal'
@@ -53,6 +53,7 @@ export default function Navigation() {
     { href: '/archive', label: t('nav.archive') },
     { href: '/tags', label: t('nav.tags') },
     { href: '/friends', label: t('nav.friends') },
+    { href: '/loaders', label: t('nav.loaders') },
     { href: '/cosmos', label: t('nav.cosmos') },
     { href: '/about', label: t('nav.about') },
   ]

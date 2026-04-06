@@ -1,5 +1,5 @@
 import { getAllTags, getPostsByTag } from '@/lib/posts'
-import Link from 'next/link'
+import Link from '@/components/TransitionLink'
 
 export async function generateStaticParams() {
   const tags = getAllTags()
