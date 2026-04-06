@@ -2,6 +2,7 @@
 
 import { useLanguage } from '@/components/LanguageProvider'
 import { Cake, MapPin, GraduationCap, ExternalLink } from 'lucide-react'
+import AppleHelloEffect from '@/components/AppleHelloEffect'
 
 interface Stats {
   totalPosts: number
@@ -94,8 +95,16 @@ export default function AboutClient({ stats }: { stats: Stats }) {
 
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-8 py-16 sm:py-24">
+      {/* Apple Hello Effect */}
+      <section className="mb-16 animate-fade-in">
+        <AppleHelloEffect
+          speed={0.8}
+          loop={true}
+        />
+      </section>
+
       {/* Hero Section with Avatar */}
-      <section className="mb-32 animate-fade-in">
+      <section className="mb-32 animate-fade-in" style={{ animationDelay: '100ms' }}>
         <div className="flex flex-col md:flex-row items-center gap-16">
           {/* Avatar */}
           <div className="relative group">
