@@ -50,6 +50,7 @@ export default function Navigation() {
 
   const navLinks = [
     { href: '/', label: t('nav.home') },
+    { href: '/diary', label: t('nav.diary') },
     { href: '/archive', label: t('nav.archive') },
     { href: '/tags', label: t('nav.tags') },
     { href: '/friends', label: t('nav.friends') },
@@ -137,6 +138,22 @@ export default function Navigation() {
               <LanguageToggle />
               <ThemeToggle />
             </div>
+          </div>
+
+          <div className="mt-4 flex gap-5 overflow-x-auto pb-1 md:hidden">
+            {navLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={`shrink-0 text-sm transition-colors ${
+                  pathname === link.href
+                    ? 'text-gray-900 dark:text-gray-100'
+                    : 'text-gray-500 dark:text-gray-400'
+                }`}
+              >
+                {link.label}
+              </Link>
+            ))}
           </div>
         </div>
       </nav>
