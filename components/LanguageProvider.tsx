@@ -17,6 +17,7 @@ const LanguageContext = createContext<{
 const translations = {
   en: {
     'nav.home': 'Home',
+    'nav.diary': 'Diary',
     'nav.archive': 'Archive',
     'nav.tags': 'Tags',
     'nav.friends': 'Friends',
@@ -131,6 +132,7 @@ const translations = {
   },
   zh: {
     'nav.home': '首页',
+    'nav.diary': '日记',
     'nav.archive': '归档',
     'nav.tags': '标签',
     'nav.friends': '友链',
