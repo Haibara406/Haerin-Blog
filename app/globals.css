@@ -1426,12 +1426,12 @@ body {
   position: relative;
   min-height: 0;
   transition:
-    width 420ms cubic-bezier(0.22, 1, 0.36, 1),
-    max-height 420ms cubic-bezier(0.22, 1, 0.36, 1),
-    padding 420ms cubic-bezier(0.22, 1, 0.36, 1),
-    border-radius 420ms cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 420ms cubic-bezier(0.22, 1, 0.36, 1),
-    background-color 420ms cubic-bezier(0.22, 1, 0.36, 1);
+    width 760ms cubic-bezier(0.16, 1, 0.3, 1),
+    max-height 760ms cubic-bezier(0.16, 1, 0.3, 1),
+    padding 760ms cubic-bezier(0.16, 1, 0.3, 1),
+    border-radius 760ms cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 760ms cubic-bezier(0.16, 1, 0.3, 1),
+    background-color 760ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .journal-filmstrip-peek {
@@ -1664,8 +1664,8 @@ body {
     gap: 0.55rem;
     opacity: 1;
     transition:
-      opacity 180ms ease,
-      transform 320ms cubic-bezier(0.22, 1, 0.36, 1);
+      opacity 280ms ease,
+      transform 560ms cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .journal-filmstrip-shell:hover .journal-filmstrip-peek,
@@ -1679,8 +1679,8 @@ body {
     pointer-events: none;
     transform: translateY(0.45rem) scale(0.985);
     transition:
-      opacity 240ms ease,
-      transform 420ms cubic-bezier(0.22, 1, 0.36, 1);
+      opacity 420ms ease,
+      transform 720ms cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .journal-filmstrip-shell:hover .journal-filmstrip-panel,
@@ -1688,7 +1688,7 @@ body {
     opacity: 1;
     pointer-events: auto;
     transform: translateY(0) scale(1);
-    transition-delay: 90ms;
+    transition-delay: 140ms;
   }
 }
 

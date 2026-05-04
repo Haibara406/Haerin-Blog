@@ -1,11 +1,5 @@
-import type { Metadata } from 'next'
-import MimoPageClient from '@/components/MimoPageClient'
-
-export const metadata: Metadata = {
-  title: 'MiMo Interactive',
-  description: 'Interactive flip card with draggable text string effects.',
-}
+import { redirect } from 'next/navigation'
 
 export default function MimoPage() {
-  return <MimoPageClient />
+  redirect('/mine')
 }

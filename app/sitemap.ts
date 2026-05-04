@@ -11,7 +11,7 @@ export default function sitemap() {
     priority: 0.8,
   }))
 
-  const routes = ['', '/about', '/archive', '/tags'].map((route) => ({
+  const routes = ['', '/mine', '/about', '/archive', '/tags'].map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date().toISOString(),
     changeFrequency: 'daily' as const,

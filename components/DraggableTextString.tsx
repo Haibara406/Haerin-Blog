@@ -1,7 +1,6 @@
 'use client'
 
 import { useEffect, useMemo, useRef } from 'react'
-import { layoutWithLines, prepareWithSegments } from '@/components/textstring/pretext'
 
 interface DraggableTextStringProps {
   text: string
@@ -77,7 +76,6 @@ export default function DraggableTextString({
 
     measureCtx.font = FONT
 
-    const prepared = prepareWithSegments(stableText, FONT)
     const allGraphemes = graphemesOf(segmenter, stableText)
     const graphemeWidths = allGraphemes.map((g) => measureCtx.measureText(g).width)
 
@@ -85,16 +83,29 @@ export default function DraggableTextString({
 
     function layoutPositions(maxWidth: number) {
       const rawPositions: Array<{ x: number; y: number; w: number }> = []
+      const lineIndices: number[][] = [[]]
       let x = 0
       let lineY = 0
+      let lineIndex = 0
+
+      const pushPosition = (index: number, posX: number, posY: number, width: number) => {
+        rawPositions.push({ x: posX, y: posY, w: width })
+        lineIndices[lineIndex].push(index)
+      }
+
+      const startNewLine = () => {
+        x = 0
+        lineY += LINE_HEIGHT
+        lineIndex += 1
+        lineIndices[lineIndex] = []
+      }
 
       for (let gi = 0; gi < allGraphemes.length; gi++) {
         const g = allGraphemes[gi]
         const w = graphemeWidths[gi]
 
         if (g !== ' ' && x > 0 && x + w > maxWidth) {
-          x = 0
-          lineY += LINE_HEIGHT
+          startNewLine()
         }
 
         if (g === ' ' && x > 0) {
@@ -104,14 +115,13 @@ export default function DraggableTextString({
           }
 
           if (x + w + wordW > maxWidth) {
-            rawPositions.push({ x: x + MARGIN, y: lineY, w })
-            x = 0
-            lineY += LINE_HEIGHT
+            pushPosition(gi, x + MARGIN, lineY, w)
+            startNewLine()
             continue
           }
         }
 
-        rawPositions.push({ x: x + MARGIN, y: lineY, w })
+        pushPosition(gi, x + MARGIN, lineY, w)
         x += w
       }
 
@@ -122,22 +132,12 @@ export default function DraggableTextString({
 
       return {
         positions: rawPositions.map((p) => ({ x: p.x, y: p.y + offsetY, w: p.w })),
+        lineIndices: lineIndices.filter((line) => line.length > 0),
         totalHeight: totalHeight + offsetY,
       }
     }
 
-    function buildZigzagMapping(maxWidth: number) {
-      const { lines } = layoutWithLines(prepared, maxWidth, LINE_HEIGHT)
-      const lineIndices: number[][] = []
-      let gi = 0
-
-      for (let li = 0; li < lines.length; li++) {
-        const lineGraphemes = graphemesOf(segmenter, lines[li].text)
-        const indices: number[] = []
-        for (let j = 0; j < lineGraphemes.length; j++) indices.push(gi++)
-        lineIndices.push(indices)
-      }
-
+    function buildZigzagMapping(lineIndices: number[][]) {
       const lastLineIdx = lineIndices.length - 1
       const needFlip = lastLineIdx % 2 === 1
       const stringOrder: number[] = []
@@ -162,7 +162,7 @@ export default function DraggableTextString({
     const effectiveMinHeight = Math.max(minHeight, parentMinHeight)
     container.style.height = `${Math.max(positions.totalHeight + 20, effectiveMinHeight)}px`
 
-    const stringOrder = buildZigzagMapping(maxWidth)
+    const stringOrder = buildZigzagMapping(positions.lineIndices)
 
     const letters: LetterState[] = stringOrder.map((ri) => {
       const p = positions.positions[ri]

@@ -72,7 +72,7 @@ export default function Navigation() {
           <div className="grid grid-cols-[1fr_auto_1fr] items-center">
             {/* Logo - 左侧，更大 */}
             <Link
-              href="/mimo"
+              href="/mine"
               className="justify-self-start font-serif text-4xl font-light tracking-tight hover:opacity-60 transition-opacity duration-200"
             >
               Haerin

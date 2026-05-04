@@ -1,6 +1,6 @@
 'use client'
 
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { CSSProperties, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import DraggableTextString from '@/components/DraggableTextString'
 
 interface MimoInteractiveHeroProps {
@@ -231,11 +231,24 @@ export default function MimoInteractiveHero({
     setFlipIndex((prev) => prev + 1)
   }
 
+  const frontStyle: CSSProperties | undefined = isBack
+    ? {
+        pointerEvents: 'none',
+        visibility: isFlipping ? 'visible' : 'hidden',
+      }
+    : undefined
+  const backStyle: CSSProperties | undefined = !isBack
+    ? {
+        pointerEvents: 'none',
+        visibility: isFlipping ? 'visible' : 'hidden',
+      }
+    : undefined
+
   return (
     <section className="mimo-hero-section">
       <div className="mimo-flip-container">
         <div className="mimo-flip-inner" ref={flipInnerRef} style={{ transform: `rotateX(${-180 * flipIndex}deg)` }}>
-          <div className="mimo-flip-front" style={isBack ? { pointerEvents: 'none' } : undefined}>
+          <div className="mimo-flip-front" style={frontStyle} aria-hidden={isBack && !isFlipping}>
             <div className="mimo-mask-hero" ref={heroRef}>
               <div className="mimo-mask-background">
                 <div className="mimo-mask-pattern">
@@ -285,7 +298,7 @@ export default function MimoInteractiveHero({
             </div>
           </div>
 
-          <div className="mimo-flip-back" style={isBack ? undefined : { pointerEvents: 'none' }}>
+          <div className="mimo-flip-back" style={backStyle} aria-hidden={!isBack && !isFlipping}>
             <div className="mimo-back-content">
               <div className="mimo-back-scroll">
                 {isBack && !isFlipping ? (
