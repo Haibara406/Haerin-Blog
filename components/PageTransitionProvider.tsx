@@ -3,7 +3,8 @@
 import { createContext, useContext, useEffect, useMemo, useRef, useState } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
 import MathCurveLoader from '@/components/MathCurveLoader'
-import { getCurveConfigById, TRANSITION_CURVE_IDS } from '@/lib/mathCurves'
+import { getCurveConfigById, MATH_CURVE_LOADERS } from '@/lib/mathCurves'
+import { usePreferences } from '@/components/ThemeProvider'
 
 type NavigationOptions = {
   href: string
@@ -36,6 +37,7 @@ const PageTransitionContext = createContext<TransitionContextValue>({
 export function PageTransitionProvider({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
   const router = useRouter()
+  const { preferences } = usePreferences()
   const [activeTransition, setActiveTransition] = useState<ActiveTransition | null>(null)
   const lastCurveRef = useRef<string | null>(null)
   const navigationTimerRef = useRef<number | null>(null)
@@ -79,15 +81,23 @@ export function PageTransitionProvider({ children }: { children: React.ReactNode
   useEffect(() => () => clearTimers(), [])
 
   const nextCurveId = () => {
-    if (TRANSITION_CURVE_IDS.length <= 1) {
-      return TRANSITION_CURVE_IDS[0]
+    if (preferences.transitionLoader.mode === 'selected') {
+      return getCurveConfigById(preferences.transitionLoader.selectedCurveId)
+        ? preferences.transitionLoader.selectedCurveId
+        : MATH_CURVE_LOADERS[0].id
     }
 
-    let curveId = TRANSITION_CURVE_IDS[Math.floor(Math.random() * TRANSITION_CURVE_IDS.length)]
+    const curveIds = MATH_CURVE_LOADERS.map((curve) => curve.id)
+
+    if (curveIds.length <= 1) {
+      return curveIds[0]
+    }
+
+    let curveId = curveIds[Math.floor(Math.random() * curveIds.length)]
 
     if (curveId === lastCurveRef.current) {
-      const currentIndex = TRANSITION_CURVE_IDS.indexOf(curveId)
-      curveId = TRANSITION_CURVE_IDS[(currentIndex + 1) % TRANSITION_CURVE_IDS.length]
+      const currentIndex = curveIds.indexOf(curveId)
+      curveId = curveIds[(currentIndex + 1) % curveIds.length]
     }
 
     lastCurveRef.current = curveId
@@ -96,6 +106,11 @@ export function PageTransitionProvider({ children }: { children: React.ReactNode
 
   const beginTransition = (runNavigation: () => void) => {
     if (activeTransition) {
+      return
+    }
+
+    if (preferences.transitionLoader.mode === 'off') {
+      runNavigation()
       return
     }
 
