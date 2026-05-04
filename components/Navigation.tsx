@@ -50,6 +50,7 @@ export default function Navigation() {
 
   const navLinks = [
     { href: '/', label: t('nav.home') },
+    { href: '/journal', label: t('nav.journal') },
     { href: '/archive', label: t('nav.archive') },
     { href: '/tags', label: t('nav.tags') },
     { href: '/friends', label: t('nav.friends') },

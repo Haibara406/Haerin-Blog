@@ -4,7 +4,6 @@ import { createContext, useContext, useEffect, useMemo, useRef, useState } from 
 import { usePathname, useRouter } from 'next/navigation'
 import MathCurveLoader from '@/components/MathCurveLoader'
 import { getCurveConfigById, TRANSITION_CURVE_IDS } from '@/lib/mathCurves'
-import { useLanguage } from './LanguageProvider'
 
 type NavigationOptions = {
   href: string
@@ -37,9 +36,8 @@ const PageTransitionContext = createContext<TransitionContextValue>({
 export function PageTransitionProvider({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
   const router = useRouter()
-  const { t, language } = useLanguage()
   const [activeTransition, setActiveTransition] = useState<ActiveTransition | null>(null)
-  const sequenceRef = useRef(0)
+  const lastCurveRef = useRef<string | null>(null)
   const navigationTimerRef = useRef<number | null>(null)
   const finishTimerRef = useRef<number | null>(null)
   const failsafeTimerRef = useRef<number | null>(null)
@@ -81,8 +79,18 @@ export function PageTransitionProvider({ children }: { children: React.ReactNode
   useEffect(() => () => clearTimers(), [])
 
   const nextCurveId = () => {
-    const curveId = TRANSITION_CURVE_IDS[sequenceRef.current % TRANSITION_CURVE_IDS.length]
-    sequenceRef.current += 1
+    if (TRANSITION_CURVE_IDS.length <= 1) {
+      return TRANSITION_CURVE_IDS[0]
+    }
+
+    let curveId = TRANSITION_CURVE_IDS[Math.floor(Math.random() * TRANSITION_CURVE_IDS.length)]
+
+    if (curveId === lastCurveRef.current) {
+      const currentIndex = TRANSITION_CURVE_IDS.indexOf(curveId)
+      curveId = TRANSITION_CURVE_IDS[(currentIndex + 1) % TRANSITION_CURVE_IDS.length]
+    }
+
+    lastCurveRef.current = curveId
     return curveId
   }
 
@@ -152,26 +160,19 @@ export function PageTransitionProvider({ children }: { children: React.ReactNode
       {children}
       {activeCurve && (
         <div className="pointer-events-none fixed inset-0 z-[120]">
-          <div className="absolute inset-0 bg-white/88 backdrop-blur-2xl dark:bg-black/84" />
-          <div className="relative flex min-h-screen items-center justify-center px-6">
-            <div className="w-full max-w-md rounded-[2rem] border border-black/10 bg-white/75 p-8 text-center text-slate-950 shadow-[0_24px_80px_rgba(15,23,42,0.16)] dark:border-white/10 dark:bg-white/5 dark:text-white dark:shadow-[0_24px_80px_rgba(0,0,0,0.48)]">
-              <div className="mx-auto flex h-48 w-48 items-center justify-center rounded-full bg-gradient-to-br from-black/[0.04] via-black/[0.01] to-transparent dark:from-white/[0.07] dark:via-white/[0.02] dark:to-transparent">
-                <MathCurveLoader
-                  curve={activeCurve}
-                  className="h-36 w-36"
-                  particleScale={1.15}
-                  strokeOpacity={0.14}
-                />
-              </div>
-              <p className="mt-6 text-xs uppercase tracking-[0.28em] text-slate-500 dark:text-white/50">
-                {t('transition.message')}
-              </p>
-              <h2 className="mt-3 font-serif text-3xl font-semibold tracking-tight">
-                {activeCurve.name[language]}
-              </h2>
-              <p className="mt-3 text-sm leading-7 text-slate-600 dark:text-white/65">
-                {activeCurve.description[language]}
-              </p>
+          <div className="absolute inset-0 bg-white/82 backdrop-blur-2xl dark:bg-black/78" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(23,23,23,0.08),transparent_42%)] dark:bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.12),transparent_42%)]" />
+          <div className="relative flex min-h-screen items-center justify-center px-6 text-gray-950 dark:text-white">
+            <div className="relative flex h-72 w-72 items-center justify-center sm:h-96 sm:w-96">
+              <div className="absolute inset-8 rounded-full border border-current/10 opacity-60" />
+              <div className="absolute inset-0 rounded-full bg-current/[0.035] blur-3xl dark:bg-current/[0.06]" />
+              <div className="absolute h-52 w-52 rounded-full border border-current/10 sm:h-72 sm:w-72" />
+              <MathCurveLoader
+                curve={activeCurve}
+                className="relative h-40 w-40 sm:h-56 sm:w-56"
+                particleScale={1.22}
+                strokeOpacity={0.16}
+              />
             </div>
           </div>
         </div>

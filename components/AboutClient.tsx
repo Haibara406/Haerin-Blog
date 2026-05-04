@@ -91,6 +91,15 @@ export default function AboutClient({ stats }: { stats: Stats }) {
       },
       tech: ['Java', 'SpringAI', 'Elasticsearch', 'Prometheus', 'MCP Protocol', 'QWen', 'DeepSeek']
     },
+    {
+      name: 'Start Page',
+      url: 'https://github.com/Haibara406/start-page',
+      desc: {
+        zh: '一个自用的浏览器起始页项目，把搜索、常用入口和个人化视觉集中到打开浏览器的第一屏',
+        en: 'A personal browser start page that keeps search, frequent links, and a personalized first screen in one place'
+      },
+      tech: ['Frontend', 'Start Page', 'Browser']
+    },
   ]
 
   return (

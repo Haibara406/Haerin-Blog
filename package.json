@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "export": "next build && next export"
+    "export": "next build && next export",
+    "journal:sync": "node scripts/sync-journals.mjs",
+    "journal:encrypt": "node scripts/build-journal-payload.mjs",
+    "journal:build": "npm run journal:sync && npm run journal:encrypt"
   },
   "dependencies": {
     "@react-three/drei": "^9.120.4",

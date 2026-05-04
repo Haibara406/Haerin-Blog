@@ -43,6 +43,12 @@ export default function Friends() {
       avatar: '/img5.jpeg',
       desc: 'AI 智能购票服务平台 / AI intelligent ticketing service platform',
     },
+    {
+      name: 'Start Page',
+      url: 'https://github.com/Haibara406/start-page',
+      avatar: '/start-page.jpeg',
+      desc: '浏览器起始页项目 / Custom browser start page',
+    },
     // 用户可以在这里添加友链
   ]
 

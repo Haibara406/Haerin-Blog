@@ -43,6 +43,10 @@ lerna-debug.log*
 .env.production.local
 !.env.example
 !.env.*.example
+.journal-password
+
+# Private content
+content/journals-private/
 
 # Local tooling
 .claude/
