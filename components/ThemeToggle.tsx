@@ -1,11 +1,18 @@
 'use client'
 
+import { useLanguage } from './LanguageProvider'
 import { useTheme } from './ThemeProvider'
 
 export default function ThemeToggle() {
-  const { theme, actualTheme, setTheme } = useTheme()
+  const { actualTheme, preferences, setTheme } = useTheme()
+  const { language } = useLanguage()
+  const locked = preferences.themeToggleLocked
 
   const toggleTheme = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (locked) {
+      return
+    }
+
     // 简化为只在 light 和 dark 之间切换
     if (actualTheme === 'light') {
       setTheme('dark', e)
@@ -17,10 +24,22 @@ export default function ThemeToggle() {
   return (
     <button
       onClick={toggleTheme}
-      className="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center
-                 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200"
+      disabled={locked}
+      className={`w-10 h-10 rounded-full flex items-center justify-center transition-colors duration-200 ${
+        locked
+          ? 'bg-gray-100 text-gray-400 opacity-60 cursor-not-allowed dark:bg-gray-800 dark:text-gray-500'
+          : 'bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700'
+      }`}
       aria-label="Toggle theme"
-      title={actualTheme === 'light' ? 'Switch to dark mode' : 'Switch to light mode'}
+      title={
+        locked
+          ? language === 'zh'
+            ? '当前使用 Happy Hues 配色，请先在设置里切回预设配色或手动配置模式'
+            : 'Happy Hues palette is locking quick theme toggle until you switch back in settings'
+          : actualTheme === 'light'
+            ? 'Switch to dark mode'
+            : 'Switch to light mode'
+      }
     >
       {actualTheme === 'light' ? (
         <svg

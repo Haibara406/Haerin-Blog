@@ -11,6 +11,7 @@ import {
   Preferences,
   AppearanceMode,
 } from '@/lib/preferences'
+import { getPaletteThemeTokens, toRgbChannels } from '@/lib/paletteThemes'
 
 type PreferencesUpdater = Preferences | ((current: Preferences) => Preferences)
 
@@ -74,12 +75,36 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const applyPreferences = useCallback((nextPreferences: Preferences, x?: number, y?: number) => {
     const root = document.documentElement
     const applied = resolveActualTheme(nextPreferences.mode)
+    const paletteTokens = getPaletteThemeTokens(nextPreferences.palette, applied)
 
     const applyDom = () => {
       setActualTheme(applied)
       root.classList.toggle('dark', applied === 'dark')
       root.dataset.appearance = applied
       root.dataset.palette = nextPreferences.palette
+      root.style.setProperty('--bg-primary', paletteTokens.bgPrimary)
+      root.style.setProperty('--bg-secondary', paletteTokens.bgSecondary)
+      root.style.setProperty('--surface-primary', paletteTokens.surfacePrimary)
+      root.style.setProperty('--surface-secondary', paletteTokens.surfaceSecondary)
+      root.style.setProperty('--text-primary', paletteTokens.textPrimary)
+      root.style.setProperty('--text-secondary', paletteTokens.textSecondary)
+      root.style.setProperty('--text-muted', paletteTokens.textMuted)
+      root.style.setProperty('--border-color', paletteTokens.borderColor)
+      root.style.setProperty('--accent', paletteTokens.accent)
+      root.style.setProperty('--accent-soft', paletteTokens.accentSoft)
+      root.style.setProperty('--tw-white', toRgbChannels(paletteTokens.twWhite))
+      root.style.setProperty('--tw-black', toRgbChannels(paletteTokens.twBlack))
+      root.style.setProperty('--gray-50', toRgbChannels(paletteTokens.gray['50']))
+      root.style.setProperty('--gray-100', toRgbChannels(paletteTokens.gray['100']))
+      root.style.setProperty('--gray-200', toRgbChannels(paletteTokens.gray['200']))
+      root.style.setProperty('--gray-300', toRgbChannels(paletteTokens.gray['300']))
+      root.style.setProperty('--gray-400', toRgbChannels(paletteTokens.gray['400']))
+      root.style.setProperty('--gray-500', toRgbChannels(paletteTokens.gray['500']))
+      root.style.setProperty('--gray-600', toRgbChannels(paletteTokens.gray['600']))
+      root.style.setProperty('--gray-700', toRgbChannels(paletteTokens.gray['700']))
+      root.style.setProperty('--gray-800', toRgbChannels(paletteTokens.gray['800']))
+      root.style.setProperty('--gray-900', toRgbChannels(paletteTokens.gray['900']))
+      root.style.setProperty('--gray-950', toRgbChannels(paletteTokens.gray['950']))
       root.style.setProperty('--font-body', getFontStack(nextPreferences.fonts.body))
       root.style.setProperty('--font-title', getFontStack(nextPreferences.fonts.title))
       root.style.setProperty('--font-code', getFontStack(nextPreferences.fonts.code))

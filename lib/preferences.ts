@@ -1,5 +1,6 @@
+import { isPaletteId, PaletteId } from '@/lib/paletteThemes'
+
 export type AppearanceMode = 'light' | 'dark' | 'system'
-export type PaletteId = 'default' | 'jade' | 'study'
 export type FontRole = 'body' | 'title' | 'code'
 export type FontOptionId =
   | 'system-sans'
@@ -17,6 +18,7 @@ export type FontPreferences = Record<FontRole, FontOptionId>
 export type Preferences = {
   mode: AppearanceMode
   palette: PaletteId
+  themeToggleLocked: boolean
   fonts: FontPreferences
   transitionLoader: {
     mode: TransitionLoaderMode
@@ -33,6 +35,7 @@ export const PREFERENCES_STORAGE_KEY = 'haerin-preferences-v1'
 export const DEFAULT_PREFERENCES: Preferences = {
   mode: 'system',
   palette: 'default',
+  themeToggleLocked: false,
   fonts: {
     body: 'system-sans',
     title: 'serif-current',
@@ -163,9 +166,11 @@ export function normalizePreferences(value: unknown): Preferences {
 
   return {
     mode: isOneOf(value.mode, ['light', 'dark', 'system']) ? value.mode : DEFAULT_PREFERENCES.mode,
-    palette: isOneOf(value.palette, ['default', 'jade', 'study'])
-      ? value.palette
-      : DEFAULT_PREFERENCES.palette,
+    palette: isPaletteId(value.palette) ? value.palette : DEFAULT_PREFERENCES.palette,
+    themeToggleLocked:
+      typeof value.themeToggleLocked === 'boolean'
+        ? value.themeToggleLocked
+        : DEFAULT_PREFERENCES.themeToggleLocked,
     fonts: {
       body: isOneOf(fonts.body, FONT_OPTIONS.map((font) => font.id))
         ? fonts.body

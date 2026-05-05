@@ -1,9 +1,10 @@
 'use client'
 
 import {
-  Check,
+  ArrowRight,
   Monitor,
   Moon,
+  Palette,
   RotateCcw,
   Settings2,
   Shuffle,
@@ -12,15 +13,15 @@ import {
   Type,
 } from 'lucide-react'
 import MathCurveLoader from '@/components/MathCurveLoader'
+import Link from '@/components/TransitionLink'
 import { useLanguage } from '@/components/LanguageProvider'
 import { usePreferences } from '@/components/ThemeProvider'
+import { CORE_PALETTE_OPTIONS, getPaletteOption } from '@/lib/paletteThemes'
 import {
   AppearanceMode,
-  DEFAULT_PREFERENCES,
   FONT_OPTIONS,
   FontOptionId,
   FontRole,
-  PALETTE_OPTIONS,
   READING_SIZE_OPTIONS,
   READING_WIDTH_OPTIONS,
   getFontStack,
@@ -33,8 +34,14 @@ const copy = {
     title: 'Shape the blog around the way you read',
     subtitle: 'Tune color, type, motion, and article rhythm. Everything stays in this browser.',
     theme: 'Color',
+    themeNote: 'Mode stays global. Palette sets now live in the dedicated studio.',
     mode: 'Mode',
     palette: 'Palette',
+    palettePresetsNote: 'Quick switch back to the built-in site palettes.',
+    paletteStudio: 'Custom Palette Studio',
+    paletteStudioNote: 'Browse the full Happy Hues collection, preview it against the blog surface, and apply it when it feels right.',
+    openStudio: 'Open studio',
+    currentPalette: 'Current palette',
     fonts: 'Typography',
     fontsNote: 'Separate the page voice, title voice, and code voice.',
     body: 'Page',
@@ -64,8 +71,14 @@ const copy = {
     title: '把博客调成适合你阅读的样子',
     subtitle: '颜色、字体、动效和文章节奏都会即时生效，并只保存在当前浏览器。',
     theme: '颜色',
+    themeNote: '模式仍然全局生效，完整配色已经迁到独立工作室里。',
     mode: '模式',
     palette: '调色板',
+    palettePresetsNote: '快速切回博客内置的预设配色。',
+    paletteStudio: '自定义配色工作室',
+    paletteStudioNote: '浏览完整的 Happy Hues 配色，把它放进博客场景里预览，再决定是否应用。',
+    openStudio: '打开工作室',
+    currentPalette: '当前配色',
     fonts: '字体',
     fontsNote: '页面、标题、代码块分别选择字体气质。',
     body: '页面',
@@ -112,6 +125,7 @@ export default function PreferencesClient() {
   const { language } = useLanguage()
   const text = copy[language]
   const { preferences, actualTheme, setPreferences, resetPreferences } = usePreferences()
+  const currentPalette = getPaletteOption(preferences.palette)
   const loaderEnabled = preferences.transitionLoader.mode !== 'off'
   const loaderRandom = preferences.transitionLoader.mode === 'random'
   const selectedCurve =
@@ -155,7 +169,7 @@ export default function PreferencesClient() {
                 <Sparkles className="h-5 w-5" />
                 <div>
                   <h2>{text.theme}</h2>
-                  <p>{actualTheme === 'dark' ? 'Dark surface' : 'Light surface'}</p>
+                  <p>{text.themeNote}</p>
                 </div>
               </div>
 
@@ -171,7 +185,14 @@ export default function PreferencesClient() {
                         key={option.id}
                         type="button"
                         onClick={(event) =>
-                          setPreferences((current) => ({ ...current, mode: option.id }), event)
+                          setPreferences(
+                            (current) => ({
+                              ...current,
+                              mode: option.id,
+                              themeToggleLocked: false,
+                            }),
+                            event,
+                          )
                         }
                         className={cx('preferences-segment-btn', active && 'is-active')}
                       >
@@ -186,7 +207,7 @@ export default function PreferencesClient() {
               <div className="preferences-field">
                 <p className="preferences-label">{text.palette}</p>
                 <div className="preferences-palette-grid">
-                  {PALETTE_OPTIONS.map((palette) => {
+                  {CORE_PALETTE_OPTIONS.map((palette) => {
                     const active = preferences.palette === palette.id
 
                     return (
@@ -194,19 +215,56 @@ export default function PreferencesClient() {
                         key={palette.id}
                         type="button"
                         onClick={() =>
-                          setPreferences((current) => ({ ...current, palette: palette.id }))
+                          setPreferences((current) => ({
+                            ...current,
+                            palette: palette.id,
+                            themeToggleLocked: false,
+                          }))
                         }
                         className={cx('preferences-palette-btn', active && 'is-active')}
                       >
                         <span
                           className="preferences-swatch"
-                          style={{ backgroundColor: palette.swatch }}
+                          style={{ backgroundColor: palette.swatches[1] }}
                         />
                         <span>{language === 'zh' ? palette.labelZh : palette.label}</span>
-                        {active && <Check className="ml-auto h-4 w-4" />}
                       </button>
                     )
                   })}
+                </div>
+                <p className="preferences-studio-note">{text.palettePresetsNote}</p>
+                <div className="preferences-studio-card">
+                  <div className="preferences-studio-copy">
+                    <p className="preferences-studio-label">{text.currentPalette}</p>
+                    <div className="preferences-studio-head">
+                      <h3>{language === 'zh' ? currentPalette.labelZh : currentPalette.label}</h3>
+                      <span>
+                        {actualTheme === 'dark'
+                          ? language === 'zh'
+                            ? '深色'
+                            : 'Dark'
+                          : language === 'zh'
+                            ? '浅色'
+                            : 'Light'}
+                      </span>
+                    </div>
+                    <p className="preferences-studio-note">{text.paletteStudioNote}</p>
+                    <div className="preferences-studio-swatches" aria-hidden="true">
+                      {currentPalette.swatches.map((swatch) => (
+                        <span
+                          key={`${currentPalette.id}-${swatch}`}
+                          className="preferences-studio-swatch"
+                          style={{ backgroundColor: swatch }}
+                        />
+                      ))}
+                    </div>
+                  </div>
+
+                  <Link href="/preferences/palette" className="preferences-studio-link">
+                    <Palette className="h-4 w-4" />
+                    <span>{text.openStudio}</span>
+                    <ArrowRight className="h-4 w-4" />
+                  </Link>
                 </div>
               </div>
             </section>
@@ -418,7 +476,7 @@ export default function PreferencesClient() {
 
               <div className="preferences-summary">
                 <p>{text.current}</p>
-                <span>{preferences.palette}</span>
+                <span>{language === 'zh' ? currentPalette.labelZh : currentPalette.label}</span>
                 <span>{preferences.mode}</span>
                 <span>
                   {preferences.transitionLoader.mode === 'off'
